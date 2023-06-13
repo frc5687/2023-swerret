@@ -1,5 +1,5 @@
 /* (C)2020-2021 */
-package org.frc5687.swerve.commands;
+package org.frc5687.swerret.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;

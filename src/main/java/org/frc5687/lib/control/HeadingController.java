@@ -1,8 +1,9 @@
 package org.frc5687.lib.control;
 
+import org.frc5687.swerret.Constants;
+
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import org.frc5687.swerve.Constants;
 
 public class HeadingController {
     public enum HeadingControllerState {

@@ -1,9 +1,10 @@
-package org.frc5687.swerve.commands;
+package org.frc5687.swerret.commands;
 
 import edu.wpi.first.math.geometry.Rotation2d;
-import org.frc5687.swerve.Constants;
-import org.frc5687.swerve.subsystems.DriveTrain;
+
 import org.frc5687.lib.control.SwerveHeadingController.HeadingState;
+import org.frc5687.swerret.Constants;
+import org.frc5687.swerret.subsystems.DriveTrain;
 
 public class SnapTo extends OutliersCommand {
     private DriveTrain _driveTrain;

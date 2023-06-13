@@ -1,8 +1,8 @@
-package org.frc5687.swerve.commands;
+package org.frc5687.swerret.commands;
 
-import org.frc5687.swerve.Constants;
-import org.frc5687.swerve.subsystems.DriveTrain;
-import org.frc5687.swerve.subsystems.DriveTrain.Mode;
+import org.frc5687.swerret.Constants;
+import org.frc5687.swerret.subsystems.DriveTrain;
+import org.frc5687.swerret.subsystems.DriveTrain.Mode;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 

@@ -1,5 +1,5 @@
 /* Team 5687 (C)2020-2022 */
-package org.frc5687.swerve;
+package org.frc5687.swerret;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -11,7 +11,7 @@ import java.io.FileReader;
 
 import org.frc5687.lib.logging.ILoggingSource;
 import org.frc5687.lib.logging.MetricTracker;
-import org.frc5687.swerve.util.*;
+import org.frc5687.swerret.util.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to

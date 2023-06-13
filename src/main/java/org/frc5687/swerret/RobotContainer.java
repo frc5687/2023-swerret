@@ -1,6 +1,11 @@
 /* Team 5687 (C)2021 */
 /* Team 5687 (C)2021-2022 */
-package org.frc5687.swerve;
+package org.frc5687.swerret;
+
+import org.frc5687.swerret.commands.Drive;
+import org.frc5687.swerret.commands.OutliersCommand;
+import org.frc5687.swerret.subsystems.*;
+import org.frc5687.swerret.util.*;
 
 import com.ctre.phoenixpro.configs.Pigeon2Configuration;
 import com.ctre.phoenixpro.hardware.Pigeon2;
@@ -8,11 +13,6 @@ import com.pathplanner.lib.PathConstraints;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import org.frc5687.swerve.commands.Drive;
-import org.frc5687.swerve.commands.OutliersCommand;
-import org.frc5687.swerve.subsystems.*;
-import org.frc5687.swerve.util.*;
-// import org.frc5687.lib.vision.VisionProcessor;
 
 public class RobotContainer extends OutliersContainer {
 

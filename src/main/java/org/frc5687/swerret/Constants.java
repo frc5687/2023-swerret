@@ -1,4 +1,4 @@
-package org.frc5687.swerve;
+package org.frc5687.swerret;
 
 import com.ctre.phoenix.led.TwinkleAnimation.TwinklePercent;
 import com.ctre.phoenix.led.TwinkleOffAnimation.TwinkleOffPercent;
@@ -11,9 +11,10 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
 import java.util.Arrays;
 import java.util.List;
-import org.frc5687.swerve.subsystems.DiffSwerveModule;
+
 import org.frc5687.lib.drivers.OutliersTalon;
 import org.frc5687.lib.swerve.SwerveSetpointGenerator.KinematicLimits;
+import org.frc5687.swerret.subsystems.DiffSwerveModule;
 
 public class Constants {
     public static final int TICKS_PER_UPDATE = 10;

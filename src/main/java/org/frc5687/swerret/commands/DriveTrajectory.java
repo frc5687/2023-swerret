@@ -1,5 +1,5 @@
 /* Team 5687 (C)2021-2022 */
-package org.frc5687.swerve.commands;
+package org.frc5687.swerret.commands;
 
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.PathPlannerTrajectory.PathPlannerState;
@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.function.Consumer;
 
-import org.frc5687.swerve.Constants;
-import org.frc5687.swerve.subsystems.DriveTrain;
+import org.frc5687.swerret.Constants;
+import org.frc5687.swerret.subsystems.DriveTrain;
 
 /** Custom PathPlanner version of SwerveControllerCommand */
 public class DriveTrajectory extends OutliersCommand {

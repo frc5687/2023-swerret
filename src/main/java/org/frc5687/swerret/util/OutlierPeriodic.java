@@ -1,5 +1,5 @@
 /* Team 5687 (C)2022 */
-package org.frc5687.swerve.util;
+package org.frc5687.swerret.util;
 
 public interface OutlierPeriodic {
     /** Control processing periodic function */

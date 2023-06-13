@@ -1,7 +1,5 @@
 /* Team 5687 (C)2020-2021 */
-package org.frc5687.swerve;
-
-import static org.frc5687.swerve.util.Helpers.*;
+package org.frc5687.swerret;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
@@ -12,11 +10,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import org.frc5687.swerve.commands.*;
-import org.frc5687.swerve.subsystems.*;
-import org.frc5687.swerve.util.OutliersProxy;
+
+import static org.frc5687.swerret.util.Helpers.*;
+
 import org.frc5687.lib.oi.AxisButton;
 import org.frc5687.lib.oi.Gamepad;
+import org.frc5687.swerret.commands.*;
+import org.frc5687.swerret.subsystems.*;
+import org.frc5687.swerret.util.OutliersProxy;
 
 public class OI extends OutliersProxy {
     protected Gamepad _driverGamepad;

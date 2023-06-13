@@ -1,7 +1,5 @@
 /* Team 5687 (C)5687-2022 */
-package org.frc5687.swerve.subsystems;
-
-import static org.frc5687.swerve.Constants.DifferentialSwerveModule.*;
+package org.frc5687.swerret.subsystems;
 
 import com.ctre.phoenixpro.BaseStatusSignalValue;
 import com.ctre.phoenixpro.StatusSignalValue;
@@ -22,10 +20,13 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.frc5687.swerve.Constants;
-import org.frc5687.swerve.util.Helpers;
+
 import org.frc5687.lib.drivers.OutliersTalon;
 import org.frc5687.lib.math.LinearSystems;
+import org.frc5687.swerret.Constants;
+import org.frc5687.swerret.util.Helpers;
+
+import static org.frc5687.swerret.Constants.DifferentialSwerveModule.*;
 
 import java.sql.Driver;
 

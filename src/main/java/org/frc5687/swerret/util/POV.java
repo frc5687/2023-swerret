@@ -1,5 +1,5 @@
 /* (C)2020-2021 */
-package org.frc5687.swerve.util;
+package org.frc5687.swerret.util;
 /**
  * Control type for the POV stick/DPAD, which is read as an angle by WPILib.
  *

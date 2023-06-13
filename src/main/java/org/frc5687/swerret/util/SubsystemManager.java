@@ -1,13 +1,14 @@
 /* Team 5687 (C)2022 */
-package org.frc5687.swerve.util;
+package org.frc5687.swerret.util;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.ArrayList;
 import java.util.List;
-import org.frc5687.swerve.Constants;
-import org.frc5687.swerve.subsystems.OutliersSubsystem;
+
+import org.frc5687.swerret.Constants;
+import org.frc5687.swerret.subsystems.OutliersSubsystem;
 
 public final class SubsystemManager {
     private final List<OutliersSubsystem> _subsystems = new ArrayList<>();
