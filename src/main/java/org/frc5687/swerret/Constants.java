@@ -274,4 +274,24 @@ public class Constants {
         public static final double MAX_MODULE_ACCELERATION = (FALCON_FREE_SPEED / GEAR_RATIO_WHEEL) * 4;
         public static final double MAX_MODULE_JERK = MAX_MODULE_ACCELERATION * 2;
     }
+
+    public static class TURRET {
+        public static final OutliersTalon.ClosedLoopConfiguration CONTROLLER_CONFIG = new OutliersTalon.ClosedLoopConfiguration();
+
+        static {
+            CONTROLLER_CONFIG.SLOT = 0;
+
+            CONTROLLER_CONFIG.kP = 1.3;
+            CONTROLLER_CONFIG.kI = 0;
+            CONTROLLER_CONFIG.kD = 0.0;
+            CONTROLLER_CONFIG.kF = 0.0;
+
+            CONTROLLER_CONFIG.CRUISE_VELOCITY = 100;
+            CONTROLLER_CONFIG.ACCELERATION = 600;
+            CONTROLLER_CONFIG.JERK = 3200;
+        }
+
+        public static final double GEAR_RATIO = 50.0;
+        public static final double ANGLE_TOLERANCE = 0.1;
+    }
 }

@@ -21,10 +21,7 @@ public class RobotMap {
             public static final int SOUTH_EAST_INNER = 6;
             public static final int SOUTH_WEST_INNER = 4;
             public static final int SOUTH_WEST_OUTER = 3;
-            public static final int ARM = 9;
-            public static final int EXT_ARM = 12;
-            public static final int CUBESHOOTER_WRIST = 15;
-            public static final int CUBESHOOTER_SHOOTER = 14;
+            public static final int TURRET = 9;
         }
 
         public static class PIGEON {
@@ -35,10 +32,7 @@ public class RobotMap {
             public static final int PORT = 13;
         }
 
-        public static class TalonSRX {
-            public static final int GRIPPER = 11;
-            public static final int WRIST = 10;
-        }
+        public static class TalonSRX {}
     }
 
     /**
@@ -75,16 +69,6 @@ public class RobotMap {
         public static final int ENCODER_SE = 16; // takes up 3 slots ABS, A, B channels.
         public static final int ENCODER_SW = 13; // takes up 3 slots ABS, A, B channels.
 
-        public static final int ENCODER_GRIPPER = 4;
-        public static final int ENCODER_WRIST = 5;
-        // public static final int TOP_HALL_ARM = 9; // north is 9
-        //        public static final int BOTTOM_HALL_ARM = 8; // south is 8
-
-        public static final int IN_EXT_HALL = 6;
-        public static final int CUBESHOOTER_PROXIMITY = 7;
-        public static final int ARM_ENCODER = 8;
-        public static final int ENCODER_CUBESHOOTER_WRIST = 9;
-        public static final int ARM_ENCODER_A = 19;
-        public static final int ARM_ENCODER_B = 20;
+        public static final int TURRET_HALL = 3;
     }
 }

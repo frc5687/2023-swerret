@@ -4,6 +4,7 @@ package org.frc5687.swerret;
 
 import org.frc5687.swerret.commands.Drive;
 import org.frc5687.swerret.commands.OutliersCommand;
+import org.frc5687.swerret.commands.Turret.TurretWiggle;
 import org.frc5687.swerret.subsystems.*;
 import org.frc5687.swerret.util.*;
 
@@ -21,6 +22,7 @@ public class RobotContainer extends OutliersContainer {
     private Pigeon2 _imu;
     private Robot _robot;
     private DriveTrain _driveTrain;
+    private Turret _turret;
     // private PhotonProcessor _photonProcessor;
     // private Trajectories _trajectories;
 
@@ -53,6 +55,7 @@ public class RobotContainer extends OutliersContainer {
 
         _driveTrain = new DriveTrain(this, _imu);
         //         This is for auto temporarily, need to fix for both in future.
+        _turret = new Turret(this);
 
         setDefaultCommand(_driveTrain, new Drive(_driveTrain, _oi));
 
@@ -62,16 +65,6 @@ public class RobotContainer extends OutliersContainer {
         _robot.addPeriodic(this::controllerPeriodic, 0.005, 0.00);
         _driveTrain.startModules();
         startPeriodic();
-        //        _driveTrain.plotTrajectory(TrajectoryGenerator.generateTrajectory(
-        //                Constants.Auto.TrajectoryPoints.Node8.RED_NODE_EIGHT_TRAJECTORY_ONE,
-        // _driveTrain.getConfig()), "one");
-        //        _driveTrain.plotTrajectory(TrajectoryGenerator.generateTrajectory(
-        //                Constants.Auto.TrajectoryPoints.Node8.RED_NODE_EIGHT_TRAJECTORY_TWO,
-        // _driveTrain.getConfig()), "Two");
-        //        _driveTrain.resetRobotPose(Constants.Auto.FieldPoses.RED_NODE_EIGHT_GOAL);
-        //        _driveTrain.plotTrajectory(TrajectoryGenerator.generateTrajectory(
-        //                Constants.Auto.TrajectoryPoints.Node2.RED_NODE_TWO_TRAJECTORY_ONE,
-        // _driveTrain.getConfig()));
     }
 
     public void periodic() {}
@@ -95,6 +88,10 @@ public class RobotContainer extends OutliersContainer {
         }
         CommandScheduler s = CommandScheduler.getInstance();
         s.setDefaultCommand(subSystem, command);
+    }
+
+    public Command getAutoCommand() {
+        return new TurretWiggle(_turret);
     }
 
     public void controllerPeriodic() {
