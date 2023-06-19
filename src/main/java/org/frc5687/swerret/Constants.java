@@ -1,16 +1,10 @@
 package org.frc5687.swerret;
 
-import com.ctre.phoenix.led.TwinkleAnimation.TwinklePercent;
-import com.ctre.phoenix.led.TwinkleOffAnimation.TwinkleOffPercent;
 import com.ctre.phoenixpro.signals.InvertedValue;
 import com.ctre.phoenixpro.signals.NeutralModeValue;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
-import java.util.Arrays;
-import java.util.List;
+
 
 import org.frc5687.lib.drivers.OutliersTalon;
 import org.frc5687.lib.swerve.SwerveSetpointGenerator.KinematicLimits;
@@ -44,21 +38,21 @@ public class Constants {
         public static final int NUM_MODULES = 4;
 
         // Size of the robot chassis in meters
-        public static final double WIDTH = 0.4445; // meters
-        public static final double LENGTH = 0.4445; // meters
+        public static final double WIDTH = 0.5461; // meters
+        public static final double LENGTH = 0.5461; // meters
         // Distance of swerve modules from center of robot
         public static final double SWERVE_NS_POS = LENGTH / 2.0;
         public static final double SWERVE_WE_POS = WIDTH / 2.0;
 
-        public static final double MAX_MPS = 4.2; // Max speed of robot (m/s)
-        public static final double SLOW_MPS = 2.0; // Slow speed of robot (m/s)
+        public static final double MAX_MPS = 5.1054; // Max speed of robot (m/s)
+        public static final double SLOW_MPS = MAX_MPS / 2; // Slow speed of robot (m/s)
         public static final double MAX_ANG_VEL = Math.PI; // Max rotation rate of robot (rads/s)
         public static final double SLOW_ANG_VEL = Math.PI; // Max rotation rate of robot (rads/s)
 
         public static final KinematicLimits KINEMATIC_LIMITS = new KinematicLimits();
 
         static {
-            KINEMATIC_LIMITS.maxDriveVelocity = 5.3; // m/s
+            KINEMATIC_LIMITS.maxDriveVelocity = 6.297168; // m/s (theoretical 6.297168 m/s max)
             KINEMATIC_LIMITS.maxDriveAcceleration = 25; // m/s^2
             KINEMATIC_LIMITS.maxSteeringVelocity = 25; // rad/s
         }
@@ -236,8 +230,8 @@ public class Constants {
         //        public static final double kDt = 0.01;
         public static final double FALCON_FREE_SPEED =
                 Units.rotationsPerMinuteToRadiansPerSecond(6080); // was 6380 foc is different speed
-        public static final double GEAR_RATIO_WHEEL = 6.46875 / 1.2;
-        public static final double GEAR_RATIO_STEER = 9.2 / 1.2;
+        public static final double GEAR_RATIO_WHEEL = 4.6205; // was 6.46875 / 1.2
+        public static final double GEAR_RATIO_STEER = 6.57143; // 92/14, was 9.2 / 1.2
 
         public static final double FRICTION_STEER = 0.00;
         public static final double FRICTION_WHEEL = 0.00;
