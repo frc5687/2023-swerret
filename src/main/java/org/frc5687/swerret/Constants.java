@@ -230,8 +230,8 @@ public class Constants {
         //        public static final double kDt = 0.01;
         public static final double FALCON_FREE_SPEED =
                 Units.rotationsPerMinuteToRadiansPerSecond(6080); // was 6380 foc is different speed
-        public static final double GEAR_RATIO_WHEEL = 6.46875 / 1.2;
-        public static final double GEAR_RATIO_STEER = 9.2 / 1.2;
+        public static final double GEAR_RATIO_WHEEL = 4.6205; // was 6.46875 / 1.2
+        public static final double GEAR_RATIO_STEER = 6.57143; // 92/14, was 9.2 / 1.2
 
         public static final double FRICTION_STEER = 0.00;
         public static final double FRICTION_WHEEL = 0.00;
