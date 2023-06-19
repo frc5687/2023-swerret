@@ -23,12 +23,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.frc5687.lib.drivers.OutliersTalon;
 import org.frc5687.lib.math.LinearSystems;
-import org.frc5687.swerret.Constants;
 import org.frc5687.swerret.util.Helpers;
 
 import static org.frc5687.swerret.Constants.DifferentialSwerveModule.*;
 
-import java.sql.Driver;
 
 /**
  * Created 10/11/2020 by Dennis Slobodzian.
