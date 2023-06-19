@@ -38,21 +38,21 @@ public class Constants {
         public static final int NUM_MODULES = 4;
 
         // Size of the robot chassis in meters
-        public static final double WIDTH = 0.4445; // meters
-        public static final double LENGTH = 0.4445; // meters
+        public static final double WIDTH = 0.5461; // meters
+        public static final double LENGTH = 0.5461; // meters
         // Distance of swerve modules from center of robot
         public static final double SWERVE_NS_POS = LENGTH / 2.0;
         public static final double SWERVE_WE_POS = WIDTH / 2.0;
 
-        public static final double MAX_MPS = 4.2; // Max speed of robot (m/s)
-        public static final double SLOW_MPS = 2.0; // Slow speed of robot (m/s)
+        public static final double MAX_MPS = 5.1054; // Max speed of robot (m/s)
+        public static final double SLOW_MPS = MAX_MPS / 2; // Slow speed of robot (m/s)
         public static final double MAX_ANG_VEL = Math.PI; // Max rotation rate of robot (rads/s)
         public static final double SLOW_ANG_VEL = Math.PI; // Max rotation rate of robot (rads/s)
 
         public static final KinematicLimits KINEMATIC_LIMITS = new KinematicLimits();
 
         static {
-            KINEMATIC_LIMITS.maxDriveVelocity = 5.3; // m/s
+            KINEMATIC_LIMITS.maxDriveVelocity = 6.297168; // m/s (theoretical 6.297168 m/s max)
             KINEMATIC_LIMITS.maxDriveAcceleration = 25; // m/s^2
             KINEMATIC_LIMITS.maxSteeringVelocity = 25; // rad/s
         }
