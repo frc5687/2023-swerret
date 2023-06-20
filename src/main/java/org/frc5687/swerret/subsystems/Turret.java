@@ -38,9 +38,6 @@ public class Turret extends OutliersSubsystem {
         }
         double startingHeading = getTurretRotationRadians();
 
-        // FIXME IMPORTANT correct the range of motion. This method assumes +-2pi for a
-        // total range of motion of 4pi radians.
-
         // generate three possible headings
         // the left one is from [-2pi, 0)
         // the center one is from [0, 2pi)
@@ -106,9 +103,9 @@ public class Turret extends OutliersSubsystem {
     public void periodic() {
         super.periodic();
         if (hall.get()) {
-            warn("Turret hall activated. Encoder position: " + getEncoderPositionRotations());
 
             if (!hasZeroed) {
+                warn("Turret hall activated. Encoder position pre-zero: " + getEncoderPositionRotations());
                 zeroEncoder();
                 setTurretHeadingRaw(0);
             }

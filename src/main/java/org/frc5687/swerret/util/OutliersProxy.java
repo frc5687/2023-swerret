@@ -2,6 +2,7 @@
 package org.frc5687.swerret.util;
 
 import org.frc5687.lib.logging.ILoggingSource;
+import org.frc5687.lib.logging.RioLogger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
