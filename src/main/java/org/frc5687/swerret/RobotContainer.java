@@ -4,6 +4,7 @@ package org.frc5687.swerret;
 
 import org.frc5687.swerret.commands.Drive;
 import org.frc5687.swerret.commands.OutliersCommand;
+import org.frc5687.swerret.commands.Intake.IdleIntake;
 import org.frc5687.swerret.subsystems.*;
 import org.frc5687.swerret.util.*;
 
@@ -18,6 +19,7 @@ public class RobotContainer extends OutliersContainer {
     private Pigeon2 _imu;
     private Robot _robot;
     private DriveTrain _driveTrain;
+    private Intake _intake;
     // private PhotonProcessor _photonProcessor;
     // private Trajectories _trajectories;
 
@@ -36,50 +38,57 @@ public class RobotContainer extends OutliersContainer {
         // _visionProcessor.createSubscriber("vision", "tcp://10.56.87.20:5557");
         // _trajectories = new Trajectories(new PathConstraints(3.0, 2.0));
 
-//         try {
-//             _photonProcessor =
-// //                    new PhotonProcessor(AprilTagFieldLayout.loadFromResource("2023-chargedup.json"));
-//             new PhotonProcessor(FieldConstants.aprilTags);
-//         } catch (Exception e) {
-//             e.getMessage();
-//         }
+        // try {
+        // _photonProcessor =
+        // // new
+        // PhotonProcessor(AprilTagFieldLayout.loadFromResource("2023-chargedup.json"));
+        // new PhotonProcessor(FieldConstants.aprilTags);
+        // } catch (Exception e) {
+        // e.getMessage();
+        // }
         // configure pigeon
         _imu = new Pigeon2(RobotMap.CAN.PIGEON.PIGEON, "CANivore");
         var pigeonConfig = new Pigeon2Configuration();
         _imu.getConfigurator().apply(pigeonConfig);
 
         _driveTrain = new DriveTrain(this, _imu);
-        //         This is for auto temporarily, need to fix for both in future.
+        _intake = new Intake(this);
+        // This is for auto temporarily, need to fix for both in future.
 
         setDefaultCommand(_driveTrain, new Drive(_driveTrain, _oi));
+        setDefaultCommand(_intake, new IdleIntake(_intake));
 
-        _oi.initializeButtons(_driveTrain);
+        _oi.initializeButtons(_driveTrain, _intake);
 
         // _visionProcessor.start();
         _robot.addPeriodic(this::controllerPeriodic, 0.005, 0.00);
         _driveTrain.startModules();
         startPeriodic();
-        //        _driveTrain.plotTrajectory(TrajectoryGenerator.generateTrajectory(
-        //                Constants.Auto.TrajectoryPoints.Node8.RED_NODE_EIGHT_TRAJECTORY_ONE,
+        // _driveTrain.plotTrajectory(TrajectoryGenerator.generateTrajectory(
+        // Constants.Auto.TrajectoryPoints.Node8.RED_NODE_EIGHT_TRAJECTORY_ONE,
         // _driveTrain.getConfig()), "one");
-        //        _driveTrain.plotTrajectory(TrajectoryGenerator.generateTrajectory(
-        //                Constants.Auto.TrajectoryPoints.Node8.RED_NODE_EIGHT_TRAJECTORY_TWO,
+        // _driveTrain.plotTrajectory(TrajectoryGenerator.generateTrajectory(
+        // Constants.Auto.TrajectoryPoints.Node8.RED_NODE_EIGHT_TRAJECTORY_TWO,
         // _driveTrain.getConfig()), "Two");
-        //        _driveTrain.resetRobotPose(Constants.Auto.FieldPoses.RED_NODE_EIGHT_GOAL);
-        //        _driveTrain.plotTrajectory(TrajectoryGenerator.generateTrajectory(
-        //                Constants.Auto.TrajectoryPoints.Node2.RED_NODE_TWO_TRAJECTORY_ONE,
+        // _driveTrain.resetRobotPose(Constants.Auto.FieldPoses.RED_NODE_EIGHT_GOAL);
+        // _driveTrain.plotTrajectory(TrajectoryGenerator.generateTrajectory(
+        // Constants.Auto.TrajectoryPoints.Node2.RED_NODE_TWO_TRAJECTORY_ONE,
         // _driveTrain.getConfig()));
     }
 
-    public void periodic() {}
+    public void periodic() {
+    }
 
-    public void disabledPeriodic() {}
+    public void disabledPeriodic() {
+    }
 
     @Override
-    public void disabledInit() {}
+    public void disabledInit() {
+    }
 
     @Override
-    public void teleopInit() {}
+    public void teleopInit() {
+    }
 
     @Override
     public void autonomousInit() {

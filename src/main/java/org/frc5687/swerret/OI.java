@@ -13,6 +13,7 @@ import static org.frc5687.swerret.util.Helpers.*;
 import org.frc5687.lib.oi.AxisButton;
 import org.frc5687.lib.oi.Gamepad;
 import org.frc5687.swerret.commands.*;
+import org.frc5687.swerret.commands.Intake.Shoot;
 import org.frc5687.swerret.subsystems.*;
 import org.frc5687.swerret.util.OutliersProxy;
 
@@ -29,38 +30,37 @@ public class OI extends OutliersProxy {
     protected Trigger _povButtonRight;
     protected Trigger _povButtonUp;
     protected Trigger _povButtonDown;
-    
+
     public OI() {
-    
+
         _driverGamepad = new Gamepad(0);
         _povButtonLeft = new Trigger(() -> _driverGamepad.getPOV() == 270);
         _povButtonRight = new Trigger(() -> _driverGamepad.getPOV() == 90);
         _povButtonUp = new Trigger(() -> _driverGamepad.getPOV() == 0);
         _povButtonDown = new Trigger(() -> _driverGamepad.getPOV() == 180);
-        _driverLeftTrigger =
-                new Trigger(
-                        new AxisButton(_driverGamepad, Gamepad.Axes.LEFT_TRIGGER.getNumber(), 0.05)::get);
-        _driverRightTrigger =
-                new Trigger(
-                        new AxisButton(_driverGamepad, Gamepad.Axes.RIGHT_TRIGGER.getNumber(), 0.05)::get);
+        _driverLeftTrigger = new Trigger(
+                new AxisButton(_driverGamepad, Gamepad.Axes.LEFT_TRIGGER.getNumber(), 0.05)::get);
+        _driverRightTrigger = new Trigger(
+                new AxisButton(_driverGamepad, Gamepad.Axes.RIGHT_TRIGGER.getNumber(), 0.05)::get);
     }
 
     public void initializeButtons(
-            DriveTrain drivetrain
-            ) {
+            DriveTrain drivetrain,
+            Intake intake) {
         _povButtonLeft.whileTrue(new DriveWithSpeeds(drivetrain, 0, 1));
         _povButtonRight.whileTrue(new DriveWithSpeeds(drivetrain, 0, -1));
         _povButtonUp.whileTrue(new DriveWithSpeeds(drivetrain, 1, 0));
         _povButtonDown.whileTrue(new DriveWithSpeeds(drivetrain, -1, 0));
 
-
         _driverGamepad
                 .getYButton()
                 .onTrue(new SnapTo(drivetrain, new Rotation2d(Units.degreesToRadians(0))));
-//        _driverGamepad
-//                .getYButton()
-//                .onTrue(new CharacterizeModule(drivetrain));
+        // _driverGamepad
+        // .getYButton()
+        // .onTrue(new CharacterizeModule(drivetrain));
         _driverGamepad.getAButton().onTrue(new SnapTo(drivetrain, new Rotation2d(Units.degreesToRadians(180))));
+
+        _driverRightTrigger.whileTrue(new Shoot(intake));
     }
 
     public boolean getSlowMode() {
@@ -88,6 +88,7 @@ public class OI extends OutliersProxy {
         speed = applyDeadband(speed, Constants.DriveTrain.ROTATION_DEADBAND);
         return speed;
     }
+
     protected double getSpeedFromAxis(Joystick gamepad, int axisNumber) {
         return gamepad.getRawAxis(axisNumber);
     }
@@ -97,9 +98,11 @@ public class OI extends OutliersProxy {
         // metric("Raw x", xIn);
         // metric("Raw y", yIn);
     }
+
     public void RumbleDriver() {
         _driverGamepad.setRumble(GenericHID.RumbleType.kBothRumble, 1);
     }
+
     public void stopRumbleDriver() {
         _driverGamepad.setRumble(GenericHID.RumbleType.kBothRumble, 0);
 
