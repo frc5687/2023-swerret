@@ -62,6 +62,10 @@ public class Turret extends OutliersSubsystem {
         motor.setMotionMagic(targetHeading * Constants.TURRET.GEAR_RATIO);
     }
 
+    public void setSpeed(double speed){
+        motor.set(speed);
+    }
+
     public boolean getHall() {
         return hall.get();
     }

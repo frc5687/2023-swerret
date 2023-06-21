@@ -18,6 +18,7 @@ import org.frc5687.swerret.util.OutliersProxy;
 
 public class OI extends OutliersProxy {
     protected Gamepad _driverGamepad;
+    protected Gamepad _operatorGamepad;
     protected CommandJoystick _operatorJoystick;
     protected Gamepad _buttonpad;
 
@@ -33,6 +34,7 @@ public class OI extends OutliersProxy {
     public OI() {
 
         _driverGamepad = new Gamepad(0);
+        _operatorGamepad = new Gamepad(1);
         _povButtonLeft = new Trigger(() -> _driverGamepad.getPOV() == 270);
         _povButtonRight = new Trigger(() -> _driverGamepad.getPOV() == 90);
         _povButtonUp = new Trigger(() -> _driverGamepad.getPOV() == 0);
@@ -80,6 +82,12 @@ public class OI extends OutliersProxy {
 
     public double getRotationX() {
         double speed = -getSpeedFromAxis(_driverGamepad, Gamepad.Axes.RIGHT_X.getNumber());
+        speed = applyDeadband(speed, Constants.DriveTrain.ROTATION_DEADBAND);
+        return speed;
+    }
+
+    public double getTurretX(){
+        double speed = -getSpeedFromAxis(_operatorGamepad, Gamepad.Axes.RIGHT_X.getNumber());
         speed = applyDeadband(speed, Constants.DriveTrain.ROTATION_DEADBAND);
         return speed;
     }

@@ -4,6 +4,7 @@ package org.frc5687.swerret;
 
 import org.frc5687.swerret.commands.Drive;
 import org.frc5687.swerret.commands.OutliersCommand;
+import org.frc5687.swerret.commands.Turret.SetTurretSpeed;
 import org.frc5687.swerret.commands.Turret.TurretWiggle;
 import org.frc5687.swerret.subsystems.*;
 import org.frc5687.swerret.util.*;
@@ -57,6 +58,7 @@ public class RobotContainer extends OutliersContainer {
         _turret = new Turret(this);
 
         setDefaultCommand(_driveTrain, new Drive(_driveTrain, _oi));
+        setDefaultCommand(_turret, new SetTurretSpeed(_turret, _oi));
 
         _oi.initializeButtons(_driveTrain);
 
