@@ -18,8 +18,9 @@ public class Constants {
     public static final double EPSILON = 1e-9;
 
     public static class Intake {
-        public static final double IN_SPEED = -0.3;
+        public static final double IN_SPEED = -0.658;
         public static final double OUT_SPEED = 1.0;
+        public static final double IDLESPEED = -0.05;
     }
 
     /**

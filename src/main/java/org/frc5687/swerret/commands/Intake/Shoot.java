@@ -13,9 +13,10 @@ public class Shoot extends OutliersCommand {
 
     @Override
     public void execute() {
-        super.execute();
-        _intake.setSpeed(Constants.Intake.OUT_SPEED);
+        new SetSpeed(_intake, Constants.Intake.OUT_SPEED);
     }
+
+   
 
     // end is not needed because ./IdleIntake overrides
 }

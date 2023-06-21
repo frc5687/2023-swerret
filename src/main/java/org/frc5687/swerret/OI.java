@@ -13,6 +13,7 @@ import static org.frc5687.swerret.util.Helpers.*;
 import org.frc5687.lib.oi.AxisButton;
 import org.frc5687.lib.oi.Gamepad;
 import org.frc5687.swerret.commands.*;
+import org.frc5687.swerret.commands.Intake.IntakeIntake;
 import org.frc5687.swerret.commands.Intake.Shoot;
 import org.frc5687.swerret.subsystems.*;
 import org.frc5687.swerret.util.OutliersProxy;
@@ -59,7 +60,7 @@ public class OI extends OutliersProxy {
         // .getYButton()
         // .onTrue(new CharacterizeModule(drivetrain));
         _driverGamepad.getAButton().onTrue(new SnapTo(drivetrain, new Rotation2d(Units.degreesToRadians(180))));
-
+        _driverLeftTrigger.whileTrue(new IntakeIntake(intake));
         _driverRightTrigger.whileTrue(new Shoot(intake));
     }
 

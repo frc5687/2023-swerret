@@ -6,12 +6,14 @@ import org.frc5687.swerret.util.OutliersContainer;
 import org.frc5687.lib.sensors.ProximitySensor;
 
 public class Intake extends OutliersSubsystem {
-    private OutliersTalon motor;
+    private OutliersTalon _bottomMotor;
+    private OutliersTalon _topMotor;
     private ProximitySensor proximitySensor;
 
     public Intake(OutliersContainer container) {
         super(container);
-        motor = new OutliersTalon(RobotMap.CAN.TALONFX.INTAKE, "rio", "Intake");
+        _topMotor = new OutliersTalon(RobotMap.CAN.TALONFX.TOP_INTAKE, "rio", "Top Intake");
+        _bottomMotor = new OutliersTalon(RobotMap.CAN.TALONFX.BOTTOM_INTAKE, "rio", "Bottom Intake");
         proximitySensor = new ProximitySensor(RobotMap.DIO.PROXIMITY_INTAKE);
     }
 
@@ -20,8 +22,11 @@ public class Intake extends OutliersSubsystem {
      * 
      * @param percentOutput
      */
-    public void setSpeed(double percentOutput) {
-        motor.setPercentOutput(percentOutput);
+    public void setTopSpeed(double percentOutput) {
+        _topMotor.setPercentOutput(percentOutput);
+    }
+    public void setBottomSpeed(double percentOutput){
+        _bottomMotor.setPercentOutput(percentOutput);
     }
 
     public boolean getProximity() {
@@ -31,6 +36,7 @@ public class Intake extends OutliersSubsystem {
     @Override
     public void updateDashboard() {
         metric("Proximity", getProximity());
-        metric("Motor Output", motor.get());
+        metric("Top Motor Output", _topMotor.get());
+        metric("Bottom Motor Output", _bottomMotor.get());
     }
 }

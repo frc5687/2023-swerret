@@ -4,19 +4,14 @@ import org.frc5687.swerret.Constants;
 import org.frc5687.swerret.commands.OutliersCommand;
 import org.frc5687.swerret.subsystems.Intake;
 
-public class IdleIntake extends OutliersCommand {
+public class IntakeIntake extends OutliersCommand{
     private Intake _intake;
-
-    public IdleIntake(Intake intake) {
-        _intake = intake;
+    public IntakeIntake(Intake intake){
+    _intake = intake;
     }
-
     @Override
     public void execute() {
-        super.execute();
-        
-            new SetSpeed(_intake, Constants.Intake.IDLESPEED);
-      
-        }
+        new SetSpeed(_intake, Constants.Intake.IN_SPEED);
+    }
+    
 }
-
