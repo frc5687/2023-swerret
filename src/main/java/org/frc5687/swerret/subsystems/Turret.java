@@ -10,16 +10,18 @@ import org.frc5687.swerret.util.OutliersContainer;
 import edu.wpi.first.math.util.Units;
 
 public class Turret extends OutliersSubsystem {
-    private OutliersTalon motor;
-    private boolean hasZeroed = false;
-    private HallEffect hall;
+    private OutliersTalon _motor;
+    private boolean _hasZeroed = false;
+    private boolean _pastUpLimit = false;
+    private boolean _pastDownLimit = false;
+    private HallEffect _hall;
 
     public Turret(OutliersContainer container) {
         super(container);
-        motor = new OutliersTalon(RobotMap.CAN.TALONFX.TURRET, "rio", "Turret");
-        motor.configureClosedLoop(Constants.TURRET.CONTROLLER_CONFIG);
+        _motor = new OutliersTalon(RobotMap.CAN.TALONFX.TURRET, "rio", "Turret");
+        _motor.configureClosedLoop(Constants.TURRET.CONTROLLER_CONFIG);
 
-        hall = new HallEffect(RobotMap.DIO.TURRET_HALL);
+        _hall = new HallEffect(RobotMap.DIO.TURRET_HALL);
     } 
 
     /**
@@ -60,29 +62,45 @@ public class Turret extends OutliersSubsystem {
         if (targetHeading < Math.PI * -2 || targetHeading > Math.PI * 2) {
             error("Raw turret heading can only be from -2pi to 2pi.");
         }
-        motor.setMotionMagic(targetHeading * Constants.TURRET.GEAR_RATIO);
+        _motor.setMotionMagic(targetHeading * Constants.TURRET.GEAR_RATIO);
     }
 
     public void setSpeed(double speed){
-        motor.set(speed);
+        _motor.set(speed);
     }
 
     public boolean getHall() {
-        return hall.get();
+        return _hall.get();
     }
 
     public boolean getHasZeroed() {
-        return hasZeroed;
+        return _hasZeroed;
+    }
+    
+    public boolean getPastUpLimit(){
+        return _pastUpLimit;
+    }
+
+    public void setPastUpLimit(boolean value){
+        _pastUpLimit = value;
+    }
+
+    public boolean getPastDownLimit(){
+        return _pastDownLimit;
+    }
+
+    public void setPastDownLimit(boolean value){
+        _pastDownLimit = value;
     }
 
     public void zeroEncoder() {
         warn("Turret Zeroed");
-        motor.setRotorPosition(0);
-        hasZeroed = true;
+        _motor.setRotorPosition(0);
+        _hasZeroed = true;
     }
 
     public double getEncoderPositionRotations() {
-        return motor.getPosition().getValue();
+        return _motor.getPosition().getValue();
     }
 
     public double getEncoderRotationRadians() {
@@ -116,30 +134,35 @@ public class Turret extends OutliersSubsystem {
         metric("Encoder Radians", getEncoderRotationRadians());
         metric("Turret Radians", getTurretRotationRadians());
         metric("Hall", getHall());
-        metric("Motor Output", motor.get());
-        metric("Calibrated", hasZeroed);
+        metric("Motor Output", _motor.get());
+        metric("Calibrated", _hasZeroed);
     }
 
     @Override
     public void periodic() {
         super.periodic();
-        if (hall.get()) {
+        if (_hall.get()) {
 
-            if (!hasZeroed) {
-                warn("Turret hall activated. Encoder position pre-zero: " + getEncoderPositionRotations());
+            if (!_hasZeroed) {
+                warn("Turret _hall activated. Encoder position pre-zero: " + getEncoderPositionRotations());
                 zeroEncoder();
                 setTurretHeadingRaw(0);
             }
         }
 
+        // Should the turret spin past, tells the console and sets the boolean to true depending on which direction - Simeon
         if (getTurretRotationRadians() > (Units.degreesToRadians(200))){
             error("BRO TURN BACK ITS TOO FAR UP!!");
-            setTurretHeadingMod2Pi(-160 * Math.PI/180);
+            setPastUpLimit(true);
+        } else {
+            setPastUpLimit(false);
         }
 
         if (getTurretRotationRadians() < (Units.degreesToRadians(-200))){
             error("BRO TURN BACK ITS TOO FAR DOWN!!");
-            setTurretHeadingMod2Pi(160 * Math.PI/180);
+            setPastDownLimit(true);
+        } else {
+            setPastDownLimit(false);
         }
     }
 

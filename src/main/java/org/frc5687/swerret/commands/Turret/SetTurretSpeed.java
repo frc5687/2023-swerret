@@ -4,6 +4,8 @@ import org.frc5687.swerret.OI;
 import org.frc5687.swerret.commands.OutliersCommand;
 import org.frc5687.swerret.subsystems.Turret;
 
+import edu.wpi.first.math.util.Units;
+
 public class SetTurretSpeed extends OutliersCommand {
     private Turret _turret;
     private OI _oi;
@@ -22,8 +24,15 @@ public class SetTurretSpeed extends OutliersCommand {
     }
 
     @Override
-    public void execute() {
+    public void execute() { 
+        // Will only spin manually between the limits, otherwise will automatically spin around to approximately the same angle the other way around. - Simeon
+        if (!_turret.getPastDownLimit() && !_turret.getPastUpLimit()){
         _turret.setSpeed(_oi.getTurretX());
+        } else if (_turret.getPastUpLimit()){
+            _turret.setTurretHeadingMod2Pi(Units.degreesToRadians(-160));
+        } else if (_turret.getPastDownLimit()){
+            _turret.setTurretHeadingMod2Pi(Units.degreesToRadians(160));
+        }
     }
 
     @Override
