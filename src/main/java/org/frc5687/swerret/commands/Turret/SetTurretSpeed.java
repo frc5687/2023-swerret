@@ -23,7 +23,7 @@ public class SetTurretSpeed extends OutliersCommand {
 
     @Override
     public void execute() {
-        _turret.setSpeed(_oi.getTurretX() - 0.5);
+        _turret.setSpeed(_oi.getTurretX());
     }
 
     @Override

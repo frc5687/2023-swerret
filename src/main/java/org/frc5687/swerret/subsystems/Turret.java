@@ -4,6 +4,7 @@ import org.frc5687.lib.drivers.OutliersTalon;
 import org.frc5687.swerret.Constants;
 import org.frc5687.swerret.RobotMap;
 import org.frc5687.swerret.util.HallEffect;
+import org.frc5687.swerret.util.Helpers;
 import org.frc5687.swerret.util.OutliersContainer;
 
 public class Turret extends OutliersSubsystem {
@@ -17,9 +18,7 @@ public class Turret extends OutliersSubsystem {
         motor.configureClosedLoop(Constants.TURRET.CONTROLLER_CONFIG);
 
         hall = new HallEffect(RobotMap.DIO.TURRET_HALL);
-    }
-
-    
+    } 
 
     /**
      * Points the turret in a direction mod 2pi.
@@ -93,6 +92,22 @@ public class Turret extends OutliersSubsystem {
                 getEncoderPositionRotations(), Constants.TURRET.GEAR_RATIO);
     }
 
+    public enum TurretState{
+        MANUAL(0),
+        AUTOMATIC(1);
+
+        private final int _value;
+
+        TurretState(int value){
+            _value = value;
+        }
+
+        public int getValue(){
+            return _value;
+        }
+
+    }
+
     @Override
     public void updateDashboard() {
         metric("Encoder Position", getEncoderPositionRotations());
@@ -115,6 +130,15 @@ public class Turret extends OutliersSubsystem {
             }
         }
 
+        if (getTurretRotationRadians() > (200 * Math.PI/180)){
+            error("BRO TURN BACK ITS TOO FAR UP!!");
+            setTurretHeadingMod2Pi(-160 * Math.PI/180);
+        }
+
+        if (getTurretRotationRadians() < (-200 * Math.PI/180)){
+            error("BRO TURN BACK ITS TOO FAR DOWN!!");
+            setTurretHeadingMod2Pi(160 * Math.PI/180);
+        }
     }
 
 }
