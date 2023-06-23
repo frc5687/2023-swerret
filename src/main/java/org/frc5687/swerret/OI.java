@@ -13,6 +13,7 @@ import static org.frc5687.swerret.util.Helpers.*;
 import org.frc5687.lib.oi.AxisButton;
 import org.frc5687.lib.oi.Gamepad;
 import org.frc5687.swerret.commands.*;
+import org.frc5687.swerret.commands.Turret.SetTurretHeadingMod2Pi;
 import org.frc5687.swerret.subsystems.*;
 import org.frc5687.swerret.util.OutliersProxy;
 
@@ -45,7 +46,7 @@ public class OI extends OutliersProxy {
                 new AxisButton(_driverGamepad, Gamepad.Axes.RIGHT_TRIGGER.getNumber(), 0.05)::get);
     }
 
-    public void initializeButtons(DriveTrain drivetrain) {
+    public void initializeButtons(DriveTrain drivetrain, Turret turret) {
         _povButtonLeft.whileTrue(new DriveWithSpeeds(drivetrain, 0, 1));
         _povButtonRight.whileTrue(new DriveWithSpeeds(drivetrain, 0, -1));
         _povButtonUp.whileTrue(new DriveWithSpeeds(drivetrain, 1, 0));
@@ -58,6 +59,9 @@ public class OI extends OutliersProxy {
         // .getYButton()
         // .onTrue(new CharacterizeModule(drivetrain));
         _driverGamepad.getAButton().onTrue(new SnapTo(drivetrain, new Rotation2d(Units.degreesToRadians(180))));
+
+        _operatorGamepad.getRightBumper().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI));
+        _operatorGamepad.getLeftBumper().onTrue(new SetTurretHeadingMod2Pi(turret, -Math.PI));
     }
 
     public boolean getSlowMode() {
