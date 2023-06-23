@@ -7,6 +7,8 @@ import org.frc5687.swerret.util.HallEffect;
 import org.frc5687.swerret.util.Helpers;
 import org.frc5687.swerret.util.OutliersContainer;
 
+import edu.wpi.first.math.util.Units;
+
 public class Turret extends OutliersSubsystem {
     private OutliersTalon motor;
     private boolean hasZeroed = false;
@@ -130,12 +132,12 @@ public class Turret extends OutliersSubsystem {
             }
         }
 
-        if (getTurretRotationRadians() > (200 * Math.PI/180)){
+        if (getTurretRotationRadians() > (Units.degreesToRadians(200))){
             error("BRO TURN BACK ITS TOO FAR UP!!");
             setTurretHeadingMod2Pi(-160 * Math.PI/180);
         }
 
-        if (getTurretRotationRadians() < (-200 * Math.PI/180)){
+        if (getTurretRotationRadians() < (Units.degreesToRadians(-200))){
             error("BRO TURN BACK ITS TOO FAR DOWN!!");
             setTurretHeadingMod2Pi(160 * Math.PI/180);
         }
