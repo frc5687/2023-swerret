@@ -290,7 +290,7 @@ public class Constants {
     }
 
     public static class Intake {
-        public static final double IN_SPEED = -0.658;
+        public static final double IN_SPEED = -0.458;
         public static final double OUT_SPEED = 1.0;
         public static final double IDLESPEED = -0.05;
 

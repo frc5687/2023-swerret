@@ -71,8 +71,8 @@ public class OI extends OutliersProxy {
         _operatorGamepad.getYButton().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI));
         _operatorGamepad.getXButton().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI / 2));
 
-        _driverGamepad.getRightBumper().whileTrue(new Shoot(intake));
-        _driverGamepad.getLeftBumper().whileTrue(new IntakeIntake(intake));
+        _operatorGamepad.getRightBumper().whileTrue(new Shoot(intake));
+        _operatorGamepad.getLeftBumper().whileTrue(new IntakeIntake(intake));
 
         // _driverLeftTrigger.whileTrue(new IntakeIntake(intake));
         // _driverRightTrigger.whileTrue(new Shoot(intake));
