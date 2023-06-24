@@ -4,6 +4,7 @@ package org.frc5687.swerret;
 
 import org.frc5687.swerret.commands.Drive;
 import org.frc5687.swerret.commands.OutliersCommand;
+import org.frc5687.swerret.commands.Auto.DriveForTime;
 import org.frc5687.swerret.commands.Turret.TurretWiggle;
 import org.frc5687.swerret.commands.Intake.IdleIntake;
 import org.frc5687.swerret.subsystems.*;
@@ -110,7 +111,7 @@ public class RobotContainer extends OutliersContainer {
     }
 
     public Command getAutoCommand() {
-        return new TurretWiggle(_turret);
+        return new DriveForTime(_driveTrain, 2500);
     }
 
     public void controllerPeriodic() {
