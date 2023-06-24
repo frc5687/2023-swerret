@@ -47,11 +47,13 @@ public class Turret extends OutliersSubsystem {
         double rightHeading = targetHeading % (2 * Math.PI);
         double leftHeading = rightHeading - (2 * Math.PI);
 
-        if (Math.abs(startingHeading - rightHeading) < Math.abs(startingHeading - leftHeading)) {
+        if (Math.abs(startingHeading - rightHeading) < Math.abs(startingHeading - leftHeading) && startingHeading + rightHeading < Units.degreesToRadians(300) || startingHeading + leftHeading < Units.degreesToRadians(-300)) {
             // right target is closer
             setTurretHeadingRaw(rightHeading);
+            error("CHOSE RIGHT HEADING");
         } else {
             // left target is closer
+            error("CHOSE LEFT HEADING");
             setTurretHeadingRaw(leftHeading);
         }
 
@@ -62,7 +64,7 @@ public class Turret extends OutliersSubsystem {
         if (targetHeading < Math.PI * -2 || targetHeading > Math.PI * 2) {
             error("Raw turret heading can only be from -2pi to 2pi.");
         }
-        _motor.setMotionMagic(targetHeading * Constants.TURRET.GEAR_RATIO);
+        _motor.setMotionMagic(OutliersTalon.radiansToRotations(targetHeading, Constants.TURRET.GEAR_RATIO));
     }
 
     public void setSpeed(double speed){
@@ -152,17 +154,17 @@ public class Turret extends OutliersSubsystem {
 
         // Should the turret spin past, tells the console and sets the boolean to true depending on which direction - Simeon
         if (getTurretRotationRadians() > (Units.degreesToRadians(200))){
-            error("BRO TURN BACK ITS TOO FAR UP!!");
-            setPastUpLimit(true);
+            // error("BRO TURN BACK ITS TOO FAR UP!!");
+            // setPastUpLimit(true);
         } else {
-            setPastUpLimit(false);
+            // setPastUpLimit(false);
         }
 
         if (getTurretRotationRadians() < (Units.degreesToRadians(-200))){
-            error("BRO TURN BACK ITS TOO FAR DOWN!!");
-            setPastDownLimit(true);
+            // error("BRO TURN BACK ITS TOO FAR DOWN!!");
+            // setPastDownLimit(true);
         } else {
-            setPastDownLimit(false);
+            // setPastDownLimit(false);
         }
     }
 

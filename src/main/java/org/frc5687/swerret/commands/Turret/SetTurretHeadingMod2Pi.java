@@ -12,6 +12,7 @@ public class SetTurretHeadingMod2Pi extends OutliersCommand{
     public SetTurretHeadingMod2Pi(Turret turret, double angle) {
         _turret = turret;
         _angle = angle;
+        addRequirements(turret);
     }
 
     @Override

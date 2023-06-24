@@ -58,7 +58,7 @@ public class RobotContainer extends OutliersContainer {
         _turret = new Turret(this);
 
         setDefaultCommand(_driveTrain, new Drive(_driveTrain, _oi));
-        setDefaultCommand(_turret, new SetTurretSpeed(_turret, _oi));
+        // setDefaultCommand(_turret, new SetTurretSpeed(_turret, _oi));
 
         _oi.initializeButtons(_driveTrain, _turret);
 

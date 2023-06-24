@@ -280,12 +280,12 @@ public class Constants {
             CONTROLLER_CONFIG.kD = 0.0;
             CONTROLLER_CONFIG.kF = 0.0;
 
-            CONTROLLER_CONFIG.CRUISE_VELOCITY = 100;
+            CONTROLLER_CONFIG.CRUISE_VELOCITY = 50;
             CONTROLLER_CONFIG.ACCELERATION = 600;
             CONTROLLER_CONFIG.JERK = 3200;
         }
 
-        public static final double GEAR_RATIO = 50.0;
-        public static final double ANGLE_TOLERANCE = 0.1;
+        public static final double GEAR_RATIO = 56.0;
+        public static final double ANGLE_TOLERANCE = 0.05;
     }
 }
