@@ -5,7 +5,6 @@ import com.ctre.phoenixpro.signals.NeutralModeValue;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 
-
 import org.frc5687.lib.drivers.OutliersTalon;
 import org.frc5687.lib.swerve.SwerveSetpointGenerator.KinematicLimits;
 import org.frc5687.swerret.subsystems.DiffSwerveModule;
@@ -21,17 +20,23 @@ public class Constants {
     /**
      * Coordinate System
      *
-     * <p>(X, Y): X is N or S, N is + Y is W or E, W is +
+     * <p>
+     * (X, Y): X is N or S, N is + Y is W or E, W is +
      *
-     * <p>NW (+,+) NE (+,-)
+     * <p>
+     * NW (+,+) NE (+,-)
      *
-     * <p>SW (-,+) SE (-,-)
+     * <p>
+     * SW (-,+) SE (-,-)
      *
-     * <p>We go counter-counter clockwise starting at NW of chassis:
+     * <p>
+     * We go counter-counter clockwise starting at NW of chassis:
      *
-     * <p>NW, SW, SE, NE
+     * <p>
+     * NW, SW, SE, NE
      *
-     * <p>Note: when robot is flipped over, this is clockwise.
+     * <p>
+     * Note: when robot is flipped over, this is clockwise.
      */
     public static class DriveTrain {
         public static final String CAN_BUS = "CANivore";
@@ -93,8 +98,7 @@ public class Constants {
             POV_KINEMATIC_LIMITS.maxSteeringVelocity = 10; // rad/s
         }
 
-        public static final DiffSwerveModule.ModuleConfiguration NORTH_WEST_CONFIG =
-                new DiffSwerveModule.ModuleConfiguration();
+        public static final DiffSwerveModule.ModuleConfiguration NORTH_WEST_CONFIG = new DiffSwerveModule.ModuleConfiguration();
 
         static {
             NORTH_WEST_CONFIG.moduleName = "North West";
@@ -105,8 +109,7 @@ public class Constants {
             NORTH_WEST_CONFIG.encoderOffset = -0.07617;
         }
 
-        public static final DiffSwerveModule.ModuleConfiguration SOUTH_WEST_CONFIG =
-                new DiffSwerveModule.ModuleConfiguration();
+        public static final DiffSwerveModule.ModuleConfiguration SOUTH_WEST_CONFIG = new DiffSwerveModule.ModuleConfiguration();
 
         static {
             SOUTH_WEST_CONFIG.moduleName = "South West";
@@ -117,8 +120,7 @@ public class Constants {
             SOUTH_WEST_CONFIG.encoderOffset = -0.1624;
         }
 
-        public static final DiffSwerveModule.ModuleConfiguration SOUTH_EAST_CONFIG =
-                new DiffSwerveModule.ModuleConfiguration();
+        public static final DiffSwerveModule.ModuleConfiguration SOUTH_EAST_CONFIG = new DiffSwerveModule.ModuleConfiguration();
 
         static {
             SOUTH_EAST_CONFIG.moduleName = "South East";
@@ -129,8 +131,7 @@ public class Constants {
             SOUTH_EAST_CONFIG.encoderOffset = -0.05523;
         }
 
-        public static final DiffSwerveModule.ModuleConfiguration NORTH_EAST_CONFIG =
-                new DiffSwerveModule.ModuleConfiguration();
+        public static final DiffSwerveModule.ModuleConfiguration NORTH_EAST_CONFIG = new DiffSwerveModule.ModuleConfiguration();
 
         static {
             NORTH_EAST_CONFIG.moduleName = "North East";
@@ -164,15 +165,15 @@ public class Constants {
 
         public static final double PROFILE_CONSTRAINT_VEL = Math.PI * 4.0;
         public static final double PROFILE_CONSTRAINT_ACCEL = Math.PI * 8.0;
- 
+
         public static final double kP = 3.3;
         public static final double kI = 0.0;
         public static final double kD = 0.05;
-        
+
         public static final double X_TRAJECTORY_kP = 3.8;
         public static final double X_TRAJECTORY_kI = 0.0;
         public static final double X_TRAJECTORY_kD = 0.02;
-        
+
         public static final double Y_TRAJECTORY_kP = 3.8;
         public static final double Y_TRAJECTORY_kI = 0.0;
         public static final double Y_TRAJECTORY_kD = 0.02;
@@ -186,23 +187,20 @@ public class Constants {
         public static final double HEADING_TOLERANCE = 0.15; // rad
         public static final double BUMP_DEGREES = 7;
 
-        public static final double PITCH_LOOKING_ANGLE =
-                Units.degreesToRadians(15.0); // this is degrees because sad.
-        public static final double PITCH_LEVELED_ANGLE =
-                Units.degreesToRadians(5.0); // this is degrees because sad.
+        public static final double PITCH_LOOKING_ANGLE = Units.degreesToRadians(15.0); // this is degrees because sad.
+        public static final double PITCH_LEVELED_ANGLE = Units.degreesToRadians(5.0); // this is degrees because sad.
 
         public static final double DRIVING_UP_RAMP_SPEEDS_VX = 2.0;
         public static final double DRIVING_DOWN_RAMP_SPEEDS_VX = 1.0;
 
-        public static final double AUTO_LEVEL_KP = 4.5; //PID controller for leveling
+        public static final double AUTO_LEVEL_KP = 4.5; // PID controller for leveling
         public static final double AUTO_LEVEL_KI = 0.0;
         public static final double AUTO_LEVEL_KD = 1.0;
-        
-        public static final double QUICK_LEVEL_KP = 3.0; //PID controller for leveling
+
+        public static final double QUICK_LEVEL_KP = 3.0; // PID controller for leveling
         public static final double QUICK_LEVEL_KI = 0.0;
         public static final double QUICK_LEVEL_KD = 0.5;
     }
-
 
     public static class DifferentialSwerveModule {
         public static final OutliersTalon.Configuration CONFIG = new OutliersTalon.Configuration();
@@ -219,17 +217,17 @@ public class Constants {
             CONFIG.MAX_CURRENT = 120;
             CONFIG.ENABLE_STATOR_CURRENT_LIMIT = true;
             CONFIG.CURRENT_DEADBAND = 0.1; // amps
-//                        CONFIG.USE_FOC = true;
+            // CONFIG.USE_FOC = true;
         }
 
-        public static final OutliersTalon.ClosedLoopConfiguration CLOSED_LOOP_CONFIGURATION =
-                new OutliersTalon.ClosedLoopConfiguration();
+        public static final OutliersTalon.ClosedLoopConfiguration CLOSED_LOOP_CONFIGURATION = new OutliersTalon.ClosedLoopConfiguration();
 
-        //         update rate of our modules 5ms.
+        // update rate of our modules 5ms.
         public static final double kDt = 0.005;
-        //        public static final double kDt = 0.01;
-        public static final double FALCON_FREE_SPEED =
-                Units.rotationsPerMinuteToRadiansPerSecond(6080); // was 6380 foc is different speed
+        // public static final double kDt = 0.01;
+        public static final double FALCON_FREE_SPEED = Units.rotationsPerMinuteToRadiansPerSecond(6080); // was 6380 foc
+                                                                                                         // is different
+                                                                                                         // speed
         public static final double GEAR_RATIO_WHEEL = 4.6205; // was 6.46875 / 1.2
         public static final double GEAR_RATIO_STEER = 6.57143; // 92/14, was 9.2 / 1.2
 
@@ -242,7 +240,8 @@ public class Constants {
         // Create Parameters for DiffSwerve State Space
         public static final double INERTIA_STEER = 0.001;
         public static final double INERTIA_WHEEL = 0.001;
-        // A weight for how aggressive each state should be ie. 0.08 radians will try to control the
+        // A weight for how aggressive each state should be ie. 0.08 radians will try to
+        // control the
         // angle more aggressively than the wheel angular velocity.
 
         public static final double Q_AZIMUTH = 0.06; // radians
@@ -250,18 +249,19 @@ public class Constants {
         public static final double Q_WHEEL_ANG_VELOCITY = 0.8; // radians per sec
 
         public static final double CONTROL_EFFORT = 4.0;
-        // This is for Kalman filter which isn't used for azimuth angle due to angle wrapping.
+        // This is for Kalman filter which isn't used for azimuth angle due to angle
+        // wrapping.
         // Model noise are assuming that our model isn't as accurate as our sensors.
         public static final double MODEL_AZIMUTH_ANGLE_NOISE = 0.1; // radians
         public static final double MODEL_AZIMUTH_ANG_VELOCITY_NOISE = 1.0; // radians per sec
         public static final double MODEL_WHEEL_ANG_VELOCITY_NOISE = 1.0; // radians per sec
-        // Noise from sensors. Falcon With Gearbox causes us to have more uncertainty, so we
+        // Noise from sensors. Falcon With Gearbox causes us to have more uncertainty,
+        // so we
         // increase the noise.
         public static final double SENSOR_AZIMUTH_ANGLE_NOISE = 0.01; // radians
         public static final double SENSOR_AZIMUTH_ANG_VELOCITY_NOISE = 0.1; // radians per sec
         public static final double SENSOR_WHEEL_ANG_VELOCITY_NOISE = 0.1; // radians per sec
-        public static final double MAX_MODULE_SPEED_MPS =
-                (FALCON_FREE_SPEED / GEAR_RATIO_WHEEL) * WHEEL_RADIUS;
+        public static final double MAX_MODULE_SPEED_MPS = (FALCON_FREE_SPEED / GEAR_RATIO_WHEEL) * WHEEL_RADIUS;
         public static final double MAX_ANGULAR_VELOCITY = FALCON_FREE_SPEED / GEAR_RATIO_STEER;
         public static final double MAX_ANGULAR_ACCELERATION = MAX_ANGULAR_VELOCITY * 5;
 
@@ -287,5 +287,57 @@ public class Constants {
 
         public static final double GEAR_RATIO = 56.0;
         public static final double ANGLE_TOLERANCE = 0.05;
+    }
+
+    public static class Intake {
+        public static final double IN_SPEED = -0.658;
+        public static final double OUT_SPEED = 1.0;
+        public static final double IDLESPEED = -0.05;
+
+        public static final OutliersTalon.Configuration TOP_CONFIG = new OutliersTalon.Configuration();
+
+        static {
+            TOP_CONFIG.TIME_OUT = 0.1;
+
+            TOP_CONFIG.NEUTRAL_MODE = NeutralModeValue.Brake;
+            TOP_CONFIG.INVERTED = InvertedValue.Clockwise_Positive;
+
+            TOP_CONFIG.MAX_VOLTAGE = 12.0;
+
+            TOP_CONFIG.MAX_STATOR_CURRENT = 60;
+            TOP_CONFIG.ENABLE_STATOR_CURRENT_LIMIT = true;
+            TOP_CONFIG.USE_FOC = true;
+        }
+
+        public static final OutliersTalon.ClosedLoopConfiguration CONTROLLER_CONFIG_TOP = new OutliersTalon.ClosedLoopConfiguration();
+
+        static {
+            CONTROLLER_CONFIG_TOP.CRUISE_VELOCITY = 101;
+            CONTROLLER_CONFIG_TOP.ACCELERATION = 400;
+            CONTROLLER_CONFIG_TOP.JERK = 2500;
+        }
+
+        public static final OutliersTalon.Configuration BOTTOM_CONFIG = new OutliersTalon.Configuration();
+
+        static {
+            TOP_CONFIG.TIME_OUT = 0.1;
+
+            TOP_CONFIG.NEUTRAL_MODE = NeutralModeValue.Brake;
+            TOP_CONFIG.INVERTED = InvertedValue.Clockwise_Positive;
+
+            TOP_CONFIG.MAX_VOLTAGE = 12.0;
+
+            TOP_CONFIG.MAX_STATOR_CURRENT = 60;
+            TOP_CONFIG.ENABLE_STATOR_CURRENT_LIMIT = true;
+            TOP_CONFIG.USE_FOC = true;
+        }
+
+        public static final OutliersTalon.ClosedLoopConfiguration CONTROLLER_CONFIG_BOTTOM = new OutliersTalon.ClosedLoopConfiguration();
+
+        static {
+            CONTROLLER_CONFIG_TOP.CRUISE_VELOCITY = 101;
+            CONTROLLER_CONFIG_TOP.ACCELERATION = 400;
+            CONTROLLER_CONFIG_TOP.JERK = 2500;
+        }
     }
 }
