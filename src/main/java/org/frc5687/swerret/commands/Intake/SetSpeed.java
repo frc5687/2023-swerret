@@ -3,14 +3,18 @@ package org.frc5687.swerret.commands.Intake;
 import org.frc5687.swerret.commands.OutliersCommand;
 import org.frc5687.swerret.subsystems.Intake;
 
+import zmq.io.net.Address;
+
 public class SetSpeed extends OutliersCommand{
 
     private Intake _intake;
-    private Double _speeed;
+    private double _speeed;
 
      public SetSpeed(Intake intake, double Speed){
 
         _intake = intake;
+        _speeed = Speed;
+        addRequirements(intake);
 
         
      }

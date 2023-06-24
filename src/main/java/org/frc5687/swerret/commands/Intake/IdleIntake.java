@@ -9,6 +9,7 @@ public class IdleIntake extends OutliersCommand {
 
     public IdleIntake(Intake intake) {
         _intake = intake;
+        addRequirements(_intake);
     }
 
     @Override
