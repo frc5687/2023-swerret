@@ -17,12 +17,6 @@ public class Constants {
     public static final double DATA_PERIOD = 0.02; // 20 ms
     public static final double EPSILON = 1e-9;
 
-    public static class Intake {
-        public static final double IN_SPEED = -0.658;
-        public static final double OUT_SPEED = 1.0;
-        public static final double IDLESPEED = -0.05;
-    }
-
     /**
      * Coordinate System
      *
@@ -273,5 +267,57 @@ public class Constants {
 
         public static final double MAX_MODULE_ACCELERATION = (FALCON_FREE_SPEED / GEAR_RATIO_WHEEL) * 4;
         public static final double MAX_MODULE_JERK = MAX_MODULE_ACCELERATION * 2;
+    }
+
+    public static class Intake {
+        public static final double IN_SPEED = -0.658;
+        public static final double OUT_SPEED = 1.0;
+        public static final double IDLESPEED = -0.05;
+
+        public static final OutliersTalon.Configuration TOP_CONFIG = new OutliersTalon.Configuration();
+
+        static {
+            TOP_CONFIG.TIME_OUT = 0.1;
+
+            TOP_CONFIG.NEUTRAL_MODE = NeutralModeValue.Brake;
+            TOP_CONFIG.INVERTED = InvertedValue.Clockwise_Positive;
+
+            TOP_CONFIG.MAX_VOLTAGE = 12.0;
+
+            TOP_CONFIG.MAX_STATOR_CURRENT = 60;
+            TOP_CONFIG.ENABLE_STATOR_CURRENT_LIMIT = true;
+            TOP_CONFIG.USE_FOC = true;
+        }
+
+        public static final OutliersTalon.ClosedLoopConfiguration CONTROLLER_CONFIG_TOP = new OutliersTalon.ClosedLoopConfiguration();
+
+        static {
+            CONTROLLER_CONFIG_TOP.CRUISE_VELOCITY = 101;
+            CONTROLLER_CONFIG_TOP.ACCELERATION = 400;
+            CONTROLLER_CONFIG_TOP.JERK = 2500;
+        }
+
+        public static final OutliersTalon.Configuration BOTTOM_CONFIG = new OutliersTalon.Configuration();
+
+        static {
+            TOP_CONFIG.TIME_OUT = 0.1;
+
+            TOP_CONFIG.NEUTRAL_MODE = NeutralModeValue.Brake;
+            TOP_CONFIG.INVERTED = InvertedValue.Clockwise_Positive;
+
+            TOP_CONFIG.MAX_VOLTAGE = 12.0;
+
+            TOP_CONFIG.MAX_STATOR_CURRENT = 60;
+            TOP_CONFIG.ENABLE_STATOR_CURRENT_LIMIT = true;
+            TOP_CONFIG.USE_FOC = true;
+        }
+
+        public static final OutliersTalon.ClosedLoopConfiguration CONTROLLER_CONFIG_BOTTOM = new OutliersTalon.ClosedLoopConfiguration();
+
+        static {
+            CONTROLLER_CONFIG_TOP.CRUISE_VELOCITY = 101;
+            CONTROLLER_CONFIG_TOP.ACCELERATION = 400;
+            CONTROLLER_CONFIG_TOP.JERK = 2500;
+        }
     }
 }
