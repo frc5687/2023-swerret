@@ -89,6 +89,7 @@ public class RobotMap {
                 public static final int ENCODER_SW = 3; // takes up 3 slots ABS, A, B channels.
 
                 public static final int TURRET_HALL = 9;
-                public static final int INTAKE_PROXIMITY_SENSOR = 14;
+                public static final int INTAKE_PROXIMITY_SENSOR = 13
+                ;
         }
 }

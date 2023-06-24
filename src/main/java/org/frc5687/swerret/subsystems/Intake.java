@@ -43,5 +43,6 @@ public class Intake extends OutliersSubsystem {
     public void updateDashboard() {
         metric("Top Motor Output", _topMotor.get());
         metric("Bottom Motor Output", _bottomMotor.get());
+        metric("Proximity Sensor", getProximity());
     }
 }

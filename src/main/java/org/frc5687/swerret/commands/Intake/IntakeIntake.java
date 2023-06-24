@@ -14,12 +14,20 @@ public class IntakeIntake extends OutliersCommand {
 
     @Override
     public void execute() {
-        new SetSpeed(_intake, Constants.Intake.IN_SPEED);
+        // new SetSpeed(_intake, Constants.Intake.IN_SPEED);
+        _intake.setTopSpeed(-Constants.Intake.IN_SPEED);
+        _intake.setBottomSpeed(-Constants.Intake.IN_SPEED);
     }
 
     @Override
     public boolean isFinished() {
         return _intake.getProximity();
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        _intake.setTopSpeed(0);
+        _intake.setBottomSpeed(0);
     }
 
 }
