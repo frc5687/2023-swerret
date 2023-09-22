@@ -15,8 +15,6 @@ import org.frc5687.lib.oi.Gamepad;
 import org.frc5687.swerret.commands.*;
 import org.frc5687.swerret.commands.Turret.SetTurretHeadingMod2Pi;
 import org.frc5687.swerret.commands.Turret.SetTurretHeadingRaw;
-import org.frc5687.swerret.commands.Intake.IntakeIntake;
-import org.frc5687.swerret.commands.Intake.Shoot;
 import org.frc5687.swerret.subsystems.*;
 import org.frc5687.swerret.util.OutliersProxy;
 
@@ -51,7 +49,6 @@ public class OI extends OutliersProxy {
 
     public void initializeButtons(
             DriveTrain drivetrain,
-            Intake intake,
             Turret turret) {
         _povButtonLeft.whileTrue(new DriveWithSpeeds(drivetrain, 0, 1));
         _povButtonRight.whileTrue(new DriveWithSpeeds(drivetrain, 0, -1));
@@ -70,9 +67,6 @@ public class OI extends OutliersProxy {
         _operatorGamepad.getBButton().onTrue(new SetTurretHeadingMod2Pi(turret, -Math.PI / 2));
         _operatorGamepad.getYButton().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI));
         _operatorGamepad.getXButton().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI / 2));
-
-        _operatorGamepad.getRightBumper().whileTrue(new Shoot(intake));
-        _operatorGamepad.getLeftBumper().whileTrue(new IntakeIntake(intake));
 
         // _driverLeftTrigger.whileTrue(new IntakeIntake(intake));
         // _driverRightTrigger.whileTrue(new Shoot(intake));

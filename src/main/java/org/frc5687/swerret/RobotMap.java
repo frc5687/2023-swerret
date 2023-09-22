@@ -24,8 +24,8 @@ public class RobotMap {
                         public static final int SOUTH_WEST_INNER = 5;
                         public static final int SOUTH_WEST_OUTER = 6;
                         public static final int TURRET = 9;
-                        public static final int TOP_INTAKE = 10;
-                        public static final int BOTTOM_INTAKE = 11;
+                        public static final int SHOOTER_ARM = 10;
+                        public static final int SHOOTER_ROLLER = 11;
                 }
 
                 public static class PIGEON {
