@@ -104,6 +104,30 @@ public class Gamepad extends Joystick {
     }
 
     /**
+     * Returns the direction in degrees of a control stick.
+     * Should override Joystick.getDirectionRadians().
+     * 
+     * @param xAxisValue x axis of the stick.
+     * @param yAxisValue y axis of the stick.
+     * @return double radians
+     */
+    public double getDirectionRadians(double xAxisValue, double yAxisValue) {
+        return Math.atan2(xAxisValue, -yAxisValue);
+    }
+
+    /**
+     * Returns the direction in degrees of a control stick.
+     * Should override Joystick.getDirectionDegrees().
+     * 
+     * @param xAxisValue x axis of the stick.
+     * @param yAxisValue y axis of the stick.
+     * @return double degrees
+     */
+    public double getDirectionDegrees(double xAxisValue, double yAxisValue) {
+        return Math.toDegrees(getDirectionRadians(xAxisValue, yAxisValue));
+    }
+
+    /**
      * Checks if the specified button is pressed
      *
      * @param button the desired gamepad button

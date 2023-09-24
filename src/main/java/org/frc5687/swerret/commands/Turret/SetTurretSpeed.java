@@ -23,17 +23,17 @@ public class SetTurretSpeed extends OutliersCommand {
         super.initialize();
     }
 
-    @Override
-    public void execute() { 
-        // Will only spin manually between the limits, otherwise will automatically spin around to approximately the same angle the other way around. - Simeon
-        if (!_turret.getPastDownLimit() && !_turret.getPastUpLimit()){
-        _turret.setSpeed(_oi.getTurretX());
-        } else if (_turret.getPastUpLimit()){
-            _turret.setTurretHeadingMod2Pi(Units.degreesToRadians(-160));
-        } else if (_turret.getPastDownLimit()){
-            _turret.setTurretHeadingMod2Pi(Units.degreesToRadians(160));
-        }
-    }
+    // @Override
+    // public void execute() { 
+    //     // Will only spin manually between the limits, otherwise will automatically spin around to approximately the same angle the other way around. - Simeon
+    //     if (!_turret.getPastDownLimit() && !_turret.getPastUpLimit()){
+    //     _turret.setSpeed(_oi.getTurretX());
+    //     } else if (_turret.getPastUpLimit()){
+    //         _turret.setTurretHeadingMod2Pi(Units.degreesToRadians(-160));
+    //     } else if (_turret.getPastDownLimit()){
+    //         _turret.setTurretHeadingMod2Pi(Units.degreesToRadians(160));
+    //     }
+    // }
 
     @Override
     public boolean isFinished() {

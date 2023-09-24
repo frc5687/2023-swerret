@@ -19,7 +19,7 @@ public class Turret extends OutliersSubsystem {
     public Turret(OutliersContainer container) {
         super(container);
         _motor = new OutliersTalon(RobotMap.CAN.TALONFX.TURRET, "rio", "Turret");
-        _motor.configureClosedLoop(Constants.TURRET.CONTROLLER_CONFIG);
+        _motor.configureClosedLoop(Constants.Turret.CONTROLLER_CONFIG);
 
         _hall = new HallEffect(RobotMap.DIO.TURRET_HALL);
     } 
@@ -64,7 +64,7 @@ public class Turret extends OutliersSubsystem {
         if (targetHeading < Math.PI * -2 || targetHeading > Math.PI * 2) {
             error("Raw turret heading can only be from -2pi to 2pi.");
         }
-        _motor.setMotionMagic(OutliersTalon.radiansToRotations(targetHeading, Constants.TURRET.GEAR_RATIO));
+        _motor.setMotionMagic(OutliersTalon.radiansToRotations(targetHeading, Constants.Turret.GEAR_RATIO));
     }
 
     public void setSpeed(double speed){
@@ -111,7 +111,7 @@ public class Turret extends OutliersSubsystem {
 
     public double getTurretRotationRadians() {
         return OutliersTalon.rotationsToRadians(
-                getEncoderPositionRotations(), Constants.TURRET.GEAR_RATIO);
+                getEncoderPositionRotations(), Constants.Turret.GEAR_RATIO);
     }
 
     public enum TurretState{

@@ -269,7 +269,7 @@ public class Constants {
         public static final double MAX_MODULE_JERK = MAX_MODULE_ACCELERATION * 2;
     }
 
-    public static class TURRET {
+    public static class Turret {
         public static final OutliersTalon.ClosedLoopConfiguration CONTROLLER_CONFIG = new OutliersTalon.ClosedLoopConfiguration();
 
         static {
@@ -285,7 +285,7 @@ public class Constants {
             CONTROLLER_CONFIG.JERK = 3200;
         }
 
-        public static final double GEAR_RATIO = 56.0;
+        public static final double GEAR_RATIO = 54.5;
         public static final double ANGLE_TOLERANCE = 0.05;
     }
 
@@ -293,6 +293,12 @@ public class Constants {
 
         public static final double ARM_GEAR_RATIO = 30.0;
         public static final double ROLLER_GEAR_RATIO = 7.2;
+        public static final double INTAKE_ANGLE_RAD = 0.0; //TODO: CHANGE THIS PWEASE
+        public static final double SHOOT_ANGLE_RAD = 0.0; //TODO: CHANGE THIS PWEASE
+        public static final double IDLE_ANGLE_RAD = 0.0; //TODO: CHANGE THIS PWEASE
+        public static final double INTAKE_ROLLER_SPEED = 0.0; //TODO: CHANGE THIS PWEASE
+        public static final double SHOOT_ROLLER_SPEED = 0.0; //TODO: CHANGE THIS PWEASE
+        public static final double IDLE_ROLLER_SPEED = 0.0; //TODO: CHANGE THIS PWEASE
 
         public static final OutliersTalon.ClosedLoopConfiguration CONTROLLER_CONFIG = new OutliersTalon.ClosedLoopConfiguration();
 

@@ -20,11 +20,11 @@ public class CubeShooter extends OutliersSubsystem {
         return _armMotor.getPosition().getValue();
     }
 
-    public double getArmEncoderRotationRadians() {
+    public double getArmEncoderPositionRadians() {
         return OutliersTalon.rotationsToRadians(getArmEncoderPositionRotations(), 1.0);
     }
 
-    public double getArmRotationRadians() {
+    public double getArmPositionRadians() {
         return OutliersTalon.rotationsToRadians(
                 getArmEncoderPositionRotations(), Constants.Shooter.ARM_GEAR_RATIO);
     }
@@ -47,7 +47,7 @@ public class CubeShooter extends OutliersSubsystem {
 
     @Override
     public void updateDashboard() {
-        metric("Arm Encoder Radians", getArmEncoderRotationRadians());
+        metric("Arm Encoder Radians", getArmEncoderPositionRadians());
         metric("Roller Speed", _rollerMotor.get());
     }
 }

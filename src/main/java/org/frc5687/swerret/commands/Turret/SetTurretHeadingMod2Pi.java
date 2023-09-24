@@ -22,6 +22,6 @@ public class SetTurretHeadingMod2Pi extends OutliersCommand{
 
     @Override
     public boolean isFinished() {
-        return Math.abs(_turret.getEncoderRotationRadians() - _angle) < Constants.TURRET.ANGLE_TOLERANCE;
+        return Math.abs(_turret.getEncoderRotationRadians() - _angle) < Constants.Turret.ANGLE_TOLERANCE;
     }
 }
