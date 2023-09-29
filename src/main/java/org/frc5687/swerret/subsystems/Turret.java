@@ -22,7 +22,7 @@ public class Turret extends OutliersSubsystem {
         _motor.configureClosedLoop(Constants.Turret.CONTROLLER_CONFIG);
 
         _hall = new HallEffect(RobotMap.DIO.TURRET_HALL);
-    } 
+    }
 
     /**
      * Points the turret in a direction mod 2pi.
@@ -47,7 +47,9 @@ public class Turret extends OutliersSubsystem {
         double rightHeading = targetHeading % (2 * Math.PI);
         double leftHeading = rightHeading - (2 * Math.PI);
 
-        if (Math.abs(startingHeading - rightHeading) < Math.abs(startingHeading - leftHeading) && startingHeading + rightHeading < Units.degreesToRadians(300) || startingHeading + leftHeading < Units.degreesToRadians(-300)) {
+        if (Math.abs(startingHeading - rightHeading) < Math.abs(startingHeading - leftHeading)
+                && startingHeading + rightHeading < Units.degreesToRadians(300)
+                || startingHeading + leftHeading < Units.degreesToRadians(-300)) {
             // right target is closer
             setTurretHeadingRaw(rightHeading);
             error("CHOSE RIGHT HEADING");
@@ -67,7 +69,7 @@ public class Turret extends OutliersSubsystem {
         _motor.setMotionMagic(OutliersTalon.radiansToRotations(targetHeading, Constants.Turret.GEAR_RATIO));
     }
 
-    public void setSpeed(double speed){
+    public void setSpeed(double speed) {
         _motor.set(speed);
     }
 
@@ -78,20 +80,20 @@ public class Turret extends OutliersSubsystem {
     public boolean getHasZeroed() {
         return _hasZeroed;
     }
-    
-    public boolean getPastUpLimit(){
+
+    public boolean getPastUpLimit() {
         return _pastUpLimit;
     }
 
-    public void setPastUpLimit(boolean value){
+    public void setPastUpLimit(boolean value) {
         _pastUpLimit = value;
     }
 
-    public boolean getPastDownLimit(){
+    public boolean getPastDownLimit() {
         return _pastDownLimit;
     }
 
-    public void setPastDownLimit(boolean value){
+    public void setPastDownLimit(boolean value) {
         _pastDownLimit = value;
     }
 
@@ -114,17 +116,17 @@ public class Turret extends OutliersSubsystem {
                 getEncoderPositionRotations(), Constants.Turret.GEAR_RATIO);
     }
 
-    public enum TurretState{
+    public enum TurretState {
         MANUAL(0),
         AUTOMATIC(1);
 
         private final int _value;
 
-        TurretState(int value){
+        TurretState(int value) {
             _value = value;
         }
 
-        public int getValue(){
+        public int getValue() {
             return _value;
         }
 
@@ -152,15 +154,16 @@ public class Turret extends OutliersSubsystem {
             }
         }
 
-        // Should the turret spin past, tells the console and sets the boolean to true depending on which direction - Simeon
-        if (getTurretRotationRadians() > (Units.degreesToRadians(200))){
+        // Should the turret spin past, tells the console and sets the boolean to true
+        // depending on which direction - Simeon
+        if (getTurretRotationRadians() > (Units.degreesToRadians(200))) {
             // error("BRO TURN BACK ITS TOO FAR UP!!");
             // setPastUpLimit(true);
         } else {
             // setPastUpLimit(false);
         }
 
-        if (getTurretRotationRadians() < (Units.degreesToRadians(-200))){
+        if (getTurretRotationRadians() < (Units.degreesToRadians(-200))) {
             // error("BRO TURN BACK ITS TOO FAR DOWN!!");
             // setPastDownLimit(true);
         } else {

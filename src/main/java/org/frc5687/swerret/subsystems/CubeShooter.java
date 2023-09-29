@@ -8,7 +8,7 @@ import org.frc5687.swerret.util.OutliersContainer;
 public class CubeShooter extends OutliersSubsystem {
     private OutliersTalon _armMotor;
     private OutliersTalon _rollerMotor;
-    
+
     public CubeShooter(OutliersContainer container) {
         super(container);
         _armMotor = new OutliersTalon(RobotMap.CAN.TALONFX.SHOOTER_ARM, "rio", "arm");
@@ -30,11 +30,12 @@ public class CubeShooter extends OutliersSubsystem {
     }
 
     // public double getRollerEncoderPositionRotations() {
-    //     return _rollerMotor.getPosition().getValue();
+    // return _rollerMotor.getPosition().getValue();
     // }
 
     // public double getRollerEncoderRotationRadians() {
-    //     return OutliersTalon.rotationsToRadians(getRollerEncoderPositionRotations(), Constants.Shooter.ROLLER_GEAR_RATIO);
+    // return OutliersTalon.rotationsToRadians(getRollerEncoderPositionRotations(),
+    // Constants.Shooter.ROLLER_GEAR_RATIO);
     // }
 
     public void setShooterAngleRadians(double angle) {
