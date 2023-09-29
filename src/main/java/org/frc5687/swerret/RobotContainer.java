@@ -66,7 +66,7 @@ public class RobotContainer extends OutliersContainer {
         // This is for auto temporarily, need to fix for both in future.
 
         setDefaultCommand(_driveTrain, new Drive(_driveTrain, _oi));
-        setDefaultCommand(_turret, new SetTurretHeadingMod2PiContinuous(_turret, _oi));
+        setDefaultCommand(_turret, new SetTurretHeadingMod2PiContinuous(_driveTrain, _turret, _oi));
         setDefaultCommand(_cubeShooter, new IdleCubeShooter(_cubeShooter));
 
         // _visionProcessor.start();
