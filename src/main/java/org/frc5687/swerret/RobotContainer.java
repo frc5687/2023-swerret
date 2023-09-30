@@ -58,7 +58,7 @@ public class RobotContainer extends OutliersContainer {
 
         _driveTrain = new DriveTrain(this, _imu);
         // This is for auto temporarily, need to fix for both in future.
-        _turret = new Turret(this);
+        // _turret = new Turret(this);
         _intake = new Intake(this);
 
         _oi.initializeButtons(_driveTrain, _intake, _turret);
