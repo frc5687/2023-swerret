@@ -83,9 +83,9 @@ public class RobotMap {
          * unique.
          */
         public static class DIO { // roborio has ports 0-9, navx has ports 10-19 (navx 0-9 is 10-19).
-                public static final int ENCODER_NE = 7; // takes up 3 slots ABS, A, B channels.
-                public static final int ENCODER_NW = 4; // takes up 3 slots ABS, A, B channels.
-                public static final int ENCODER_SE = 10; // takes up 3 slots ABS, A, B channels.
+                public static final int ENCODER_NE = 4; // takes up 3 slots ABS, A, B channels.
+                public static final int ENCODER_NW = 10; // takes up 3 slots ABS, A, B channels.
+                public static final int ENCODER_SE = 7; // takes up 3 slots ABS, A, B channels.
                 public static final int ENCODER_SW = 1; // takes up 3 slots ABS, A, B channels.
 
                 public static final int TURRET_HALL = 0;
