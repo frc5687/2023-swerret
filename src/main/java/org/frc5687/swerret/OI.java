@@ -66,10 +66,10 @@ public class OI extends OutliersProxy {
         // .onTrue(new CharacterizeModule(drivetrain));
         _driverGamepad.getAButton().onTrue(new SnapTo(drivetrain, new Rotation2d(Units.degreesToRadians(180))));
 
-        _operatorGamepad.getAButton().onTrue(new SetTurretHeadingMod2Pi(turret, 0));
-        _operatorGamepad.getBButton().onTrue(new SetTurretHeadingMod2Pi(turret, -Math.PI / 2));
-        _operatorGamepad.getYButton().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI));
-        _operatorGamepad.getXButton().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI / 2));
+        // _operatorGamepad.getAButton().onTrue(new SetTurretHeadingMod2Pi(turret, 0));
+        // _operatorGamepad.getBButton().onTrue(new SetTurretHeadingMod2Pi(turret, -Math.PI / 2));
+        // _operatorGamepad.getYButton().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI));
+        // _operatorGamepad.getXButton().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI / 2));
 
         _driverLeftTrigger.whileTrue(new Intake(cubeShooter));
         _driverRightTrigger.whileTrue(new Shoot(cubeShooter));
