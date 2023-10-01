@@ -83,13 +83,12 @@ public class RobotMap {
          * unique.
          */
         public static class DIO {
-                public static final int ENCODER_NE = 4; // takes up 3 slots ABS, A, B channels.
-                public static final int ENCODER_NW = 10; // takes up 3 slots ABS, A, B channels.
-                public static final int ENCODER_SE = 7; // takes up 3 slots ABS, A, B channels.
-                public static final int ENCODER_SW = 1; // takes up 3 slots ABS, A, B channels.
+                public static final int ENCODER_NW = 4; // takes up 3 slots ABS, A, B channels.
+                public static final int ENCODER_NE = 10;// takes up 3 slots ABS, A, B channels.
+                public static final int ENCODER_SE = 1; // takes up 3 slots ABS, A, B channels.
+                public static final int ENCODER_SW = 7; // takes up 3 slots ABS, A, B channels.
 
                 public static final int TURRET_HALL = 9;
-                public static final int INTAKE_PROXIMITY_SENSOR = 13
-                ;
+                public static final int INTAKE_PROXIMITY_SENSOR = 13;
         }
 }
