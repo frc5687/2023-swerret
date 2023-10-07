@@ -8,14 +8,14 @@ import org.frc5687.swerret.subsystems.Turret;
 
 import edu.wpi.first.math.util.Units;
 
-public class SetTurretHeadingMod2PiContinuous extends OutliersCommand {
+public class SetTurretHeadingContinuous extends OutliersCommand {
 
     private DriveTrain _driveTrain;
     private Turret _turret;
     private OI _oi;
     private double _angle;
 
-    public SetTurretHeadingMod2PiContinuous(DriveTrain drivetrain, Turret turret, OI oi) {
+    public SetTurretHeadingContinuous(DriveTrain drivetrain, Turret turret, OI oi) {
         _driveTrain = drivetrain;
         _turret = turret;
         _oi = oi;
@@ -28,7 +28,10 @@ public class SetTurretHeadingMod2PiContinuous extends OutliersCommand {
         // robot's rotation relative to the field
         double robotRotation = _driveTrain.getYaw();
         double relativeTurretTargetRotation = absoluteTargetRotation/*- robotRotation*/; // bypassed
-        _turret.setTurretHeadingRangeOfMotion(relativeTurretTargetRotation, 360.0);
+
+        if (!_oi.isTargetWithinDeadband()) {
+            _turret.setTurretHeadingRangeOfMotion(relativeTurretTargetRotation, Constants.Turret.RANGE_OF_MOTION);
+        }
     }
 
     // @Override

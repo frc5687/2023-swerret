@@ -56,7 +56,7 @@ public class Turret extends OutliersSubsystem {
         } else if (newTarget < -rangeOfMotion) {
             newTarget += (2 * Math.PI) * Math.ceil((-rangeOfMotion - newTarget) / (2 * Math.PI));
         }
-
+        
         setTurretHeadingRaw(newTarget);
     }
 

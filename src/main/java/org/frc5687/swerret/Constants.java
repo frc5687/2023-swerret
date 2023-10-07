@@ -287,6 +287,8 @@ public class Constants {
 
         public static final double GEAR_RATIO = 54.5;
         public static final double ANGLE_TOLERANCE = 0.05;
+        public static final double TURRET_DEADBAND = 0.2;
+        public static final double RANGE_OF_MOTION = Math.PI * 3.0;
     }
 
     public static class Shooter {

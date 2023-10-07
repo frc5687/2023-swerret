@@ -6,7 +6,7 @@ import org.frc5687.swerret.commands.Drive;
 import org.frc5687.swerret.commands.OutliersCommand;
 import org.frc5687.swerret.commands.Auto.DriveForTime;
 import org.frc5687.swerret.commands.CubeShooter.IdleCubeShooter;
-import org.frc5687.swerret.commands.Turret.SetTurretHeadingMod2PiContinuous;
+import org.frc5687.swerret.commands.Turret.SetTurretHeadingContinuous;
 import org.frc5687.swerret.commands.Turret.TurretWiggle;
 import org.frc5687.swerret.subsystems.*;
 import org.frc5687.swerret.util.*;
@@ -66,7 +66,7 @@ public class RobotContainer extends OutliersContainer {
         // This is for auto temporarily, need to fix for both in future.
 
         // setDefaultCommand(_driveTrain, new Drive(_driveTrain, _oi));
-        setDefaultCommand(_turret, new SetTurretHeadingMod2PiContinuous(_driveTrain, _turret, _oi));
+        setDefaultCommand(_turret, new SetTurretHeadingContinuous(_driveTrain, _turret, _oi));
         // setDefaultCommand(_cubeShooter, new IdleCubeShooter(_cubeShooter));
 
         // _visionProcessor.start();

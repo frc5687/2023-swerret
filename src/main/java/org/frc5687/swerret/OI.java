@@ -109,6 +109,11 @@ public class OI extends OutliersProxy {
         return angle;
     }
 
+    public boolean isTargetWithinDeadband() {
+        return Math.abs(_driverGamepad.getRawAxis(Gamepad.Axes.LEFT_X.getNumber())) < Constants.Turret.TURRET_DEADBAND 
+            && Math.abs(_driverGamepad.getRawAxis(Gamepad.Axes.LEFT_Y.getNumber())) < Constants.Turret.TURRET_DEADBAND;
+    }
+
     protected double getSpeedFromAxis(Joystick gamepad, int axisNumber) {
         return gamepad.getRawAxis(axisNumber);
     }
