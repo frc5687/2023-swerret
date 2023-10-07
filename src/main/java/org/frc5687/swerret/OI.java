@@ -102,7 +102,7 @@ public class OI extends OutliersProxy {
     }
 
     public double getTargetTurretHeading() {
-        double angle = _driverGamepad.getDirectionDegrees(
+        double angle = _driverGamepad.getDirectionRadians(
                 _driverGamepad.getRawAxis(Gamepad.Axes.LEFT_X.getNumber()),
                 _driverGamepad.getRawAxis(Gamepad.Axes.LEFT_Y.getNumber()));
         return angle;

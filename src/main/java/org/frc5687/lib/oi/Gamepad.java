@@ -115,7 +115,7 @@ public class Gamepad extends Joystick {
      * @return double radians
      */
     public double getDirectionRadians(double xAxisValue, double yAxisValue) {
-        return Math.atan2(-xAxisValue, yAxisValue);
+        return Math.atan2(-xAxisValue, -yAxisValue);
     }
 
     /**

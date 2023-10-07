@@ -61,10 +61,35 @@ public class Turret extends OutliersSubsystem {
 
         // also check if the units work, this entire method is in degrees
     }
+    
+    public void setTurretHeadingRangeOfMotion(double targetHeading, double rangeOfMotionInEachDirection) {
+        double currentHeading = getTurretRotationRadians();
+        // the value to the left where the heading would equal the target mod2pi
+        double leftHeading = /* some math */ 0.0;
+        // the value to the right
+        double rightHeading = /* some math */ 0.0;
+        
+        double distanceToLeftHeading = Math.abs(leftHeading - currentHeading);
+        double distanceToRightHeading = Math.abs(rightHeading - currentHeading);
+        if (leftHeading < -rangeOfMotionInEachDirection) {
+            distanceToLeftHeading = Double.MAX_VALUE; // impossible motion (ew sentinel values)
+        }
+        if (rightHeading > rangeOfMotionInEachDirection) {
+            distanceToRightHeading = Double.MAX_VALUE; // impossible motion (ew sentinel value)
+        }
+        if (distanceToLeftHeading != Double.MAX_VALUE || distanceToRightHeading != Double.MAX_VALUE) {
+            if (distanceToLeftHeading < distanceToRightHeading) {
+                setTurretHeadingRaw(leftHeading);
+            } else {
+                setTurretHeadingRaw(rightHeading);
+            }
+        }
+        
+    }
 
     public void setTurretHeadingRaw(double targetHeading) {
-        if (targetHeading < Math.PI * -2 || targetHeading > Math.PI * 2) {
-            error("Raw turret heading can only be from -2pi to 2pi.");
+        if (targetHeading < Math.PI * -4 || targetHeading > Math.PI * 4) {
+            error("Raw turret heading can only be from -4pi to 4pi.");
         }
         _motor.setMotionMagic(OutliersTalon.radiansToRotations(targetHeading, Constants.Turret.GEAR_RATIO));
     }
@@ -116,6 +141,10 @@ public class Turret extends OutliersSubsystem {
                 getEncoderPositionRotations(), Constants.Turret.GEAR_RATIO);
     }
 
+    public double getTurretTarget() {
+        return Units.rotationsToRadians(_motor.getClosedLoopReference().getValue()) / Constants.Turret.GEAR_RATIO;
+    }
+
     public enum TurretState {
         MANUAL(0),
         AUTOMATIC(1);
@@ -137,6 +166,10 @@ public class Turret extends OutliersSubsystem {
         metric("Encoder Position", getEncoderPositionRotations());
         metric("Encoder Radians", getEncoderRotationRadians());
         metric("Turret Radians", getTurretRotationRadians());
+        metric("Turret Degrees", Units.radiansToDegrees(getTurretRotationRadians()));
+        metric("Turret Target Radians", getTurretTarget());
+        metric("Turret Target Degrees", Units.radiansToDegrees(getTurretTarget()));
+        metric("Turret Difference", getTurretTarget() - Units.radiansToDegrees(getTurretRotationRadians()));
         metric("Hall", getHall());
         metric("Motor Output", _motor.get());
         metric("Calibrated", _hasZeroed);
