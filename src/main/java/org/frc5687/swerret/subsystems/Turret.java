@@ -25,66 +25,39 @@ public class Turret extends OutliersSubsystem {
     }
 
     /**
-     * Points the turret in a direction mod 2pi.
-     * For example, if you pass in 0.1 radians and the encoder is at 0.2 radians, it
-     * will go backwards.
-     * But, if the encoder is at 6.3 radians, it will go to 6.38, which is the same
-     * heading but a different encoder angle.
-     * This method keeps in mind the range of motion of the turret and will never
-     * tangle the wires
      * 
-     * @param targetHeading Target heading in radians.
+     * @param targetHeading the target heading in radians
+     * @param rangeOfMotion the amount the turret can be off from zero (a value of
+     *                      180 would mean that the turret can rotate +-180 from 0)
      */
-    public void setTurretHeadingMod2Pi(double targetHeading) {
-        if (targetHeading < Math.PI * -2 || targetHeading > Math.PI * 2) {
-            error("Turret heading can only be from -2pi to 2pi.");
-        }
-        double startingHeading = getTurretRotationRadians();
-
-        // generate three possible headings
-        // the left one is from [-2pi, 0)
-        // the center one is from [0, 2pi)
-        double rightHeading = targetHeading % (2 * Math.PI);
-        double leftHeading = rightHeading - (2 * Math.PI);
-
-        if (Math.abs(startingHeading - rightHeading) < Math.abs(startingHeading - leftHeading)
-                && startingHeading + rightHeading < Units.degreesToRadians(300)
-                || startingHeading + leftHeading < Units.degreesToRadians(-300)) {
-            // right target is closer
-            setTurretHeadingRaw(rightHeading);
-            error("CHOSE RIGHT HEADING");
-        } else {
-            // left target is closer
-            error("CHOSE LEFT HEADING");
-            setTurretHeadingRaw(leftHeading);
-        }
-
-        // also check if the units work, this entire method is in degrees
-    }
-    
-    public void setTurretHeadingRangeOfMotion(double targetHeading, double rangeOfMotionInEachDirection) {
+    public void setTurretHeadingRangeOfMotion(double targetHeading, double rangeOfMotion) {
         double currentHeading = getTurretRotationRadians();
-        // the value to the left where the heading would equal the target mod2pi
-        double leftHeading = /* some math */ 0.0;
-        // the value to the right
-        double rightHeading = /* some math */ 0.0;
-        
-        double distanceToLeftHeading = Math.abs(leftHeading - currentHeading);
-        double distanceToRightHeading = Math.abs(rightHeading - currentHeading);
-        if (leftHeading < -rangeOfMotionInEachDirection) {
-            distanceToLeftHeading = Double.MAX_VALUE; // impossible motion (ew sentinel values)
-        }
-        if (rightHeading > rangeOfMotionInEachDirection) {
-            distanceToRightHeading = Double.MAX_VALUE; // impossible motion (ew sentinel value)
-        }
-        if (distanceToLeftHeading != Double.MAX_VALUE || distanceToRightHeading != Double.MAX_VALUE) {
-            if (distanceToLeftHeading < distanceToRightHeading) {
-                setTurretHeadingRaw(leftHeading);
+        double currentHeadingMod2Pi = currentHeading % (2 * Math.PI);
+        double targetHeadingMod2Pi = targetHeading % (2 * Math.PI);
+        double newTarget;
+        if (currentHeadingMod2Pi > targetHeadingMod2Pi) {
+            if (currentHeadingMod2Pi - targetHeadingMod2Pi < (2 * Math.PI) + targetHeadingMod2Pi
+                    - currentHeadingMod2Pi) {
+                newTarget = currentHeading + targetHeadingMod2Pi - currentHeadingMod2Pi;
             } else {
-                setTurretHeadingRaw(rightHeading);
+                newTarget = currentHeading + targetHeadingMod2Pi - currentHeadingMod2Pi + (2 * Math.PI);
+            }
+        } else {
+            if (targetHeadingMod2Pi - currentHeadingMod2Pi < (2 * Math.PI) + currentHeadingMod2Pi
+                    - targetHeadingMod2Pi) {
+                newTarget = currentHeading + targetHeadingMod2Pi - currentHeadingMod2Pi;
+            } else {
+                newTarget = currentHeading + targetHeadingMod2Pi - currentHeadingMod2Pi - (2 * Math.PI);
             }
         }
-        
+
+        if (newTarget > rangeOfMotion) {
+            newTarget -= (2 * Math.PI) * Math.ceil((newTarget - rangeOfMotion) / (2 * Math.PI));
+        } else if (newTarget < -rangeOfMotion) {
+            newTarget += (2 * Math.PI) * Math.ceil((-rangeOfMotion - newTarget) / (2 * Math.PI));
+        }
+
+        setTurretHeadingRaw(newTarget);
     }
 
     public void setTurretHeadingRaw(double targetHeading) {

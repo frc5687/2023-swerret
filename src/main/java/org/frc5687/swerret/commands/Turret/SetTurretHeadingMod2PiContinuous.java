@@ -28,7 +28,7 @@ public class SetTurretHeadingMod2PiContinuous extends OutliersCommand {
         // robot's rotation relative to the field
         double robotRotation = _driveTrain.getYaw();
         double relativeTurretTargetRotation = absoluteTargetRotation/*- robotRotation*/; // bypassed
-        _turret.setTurretHeadingRaw(relativeTurretTargetRotation);
+        _turret.setTurretHeadingRangeOfMotion(relativeTurretTargetRotation, 360.0);
     }
 
     // @Override
