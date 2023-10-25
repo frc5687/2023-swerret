@@ -49,7 +49,7 @@ public class Constants {
         public static final double SWERVE_NS_POS = LENGTH / 2.0;
         public static final double SWERVE_WE_POS = WIDTH / 2.0;
 
-        public static final double MAX_MPS = 2.1054; // Max speed of robot (m/s)
+        public static final double MAX_MPS = 0.6; // Max speed of robot (m/s)
         public static final double SLOW_MPS = MAX_MPS / 2; // Slow speed of robot (m/s)
         public static final double MAX_ANG_VEL = Math.PI; // Max rotation rate of robot (rads/s)
         public static final double SLOW_ANG_VEL = Math.PI; // Max rotation rate of robot (rads/s)
