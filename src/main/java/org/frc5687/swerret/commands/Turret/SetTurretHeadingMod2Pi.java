@@ -4,12 +4,12 @@ import org.frc5687.swerret.Constants;
 import org.frc5687.swerret.commands.OutliersCommand;
 import org.frc5687.swerret.subsystems.Turret;
 
-public class SetTurretHeadingRaw extends OutliersCommand{
+public class SetTurretHeadingMod2Pi extends OutliersCommand{
 
     private Turret _turret;
     private double _angle;
     
-    public SetTurretHeadingRaw(Turret turret, double angle) {
+    public SetTurretHeadingMod2Pi(Turret turret, double angle) {
         _turret = turret;
         _angle = angle;
         addRequirements(turret);
@@ -17,13 +17,7 @@ public class SetTurretHeadingRaw extends OutliersCommand{
 
     @Override
     public void initialize() {
-        _turret.setTurretHeadingRaw(_angle);
-        error("GOING TO POSITION BOSS");
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        error("HAS GOTTEN TO ITS POSITION BOSS!");
+        _turret.setTurretHeadingMod2Pi(_angle);
     }
 
     @Override
