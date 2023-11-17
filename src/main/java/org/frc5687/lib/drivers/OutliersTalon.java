@@ -17,8 +17,10 @@ import com.ctre.phoenixpro.signals.InvertedValue;
 import com.ctre.phoenixpro.signals.NeutralModeValue;
 
 /**
- * TalonFX wrapper class that uses 254's LazyTalonFX that reduces CAN bus / CPU overhead by skipping
- * duplicate set commands. (By default the Talon flushes the Tx buffer on every set call).
+ * TalonFX wrapper class that uses 254's LazyTalonFX that reduces CAN bus / CPU
+ * overhead by skipping
+ * duplicate set commands. (By default the Talon flushes the Tx buffer on every
+ * set call).
  */
 public class OutliersTalon extends TalonFX {
     // private final String _name;

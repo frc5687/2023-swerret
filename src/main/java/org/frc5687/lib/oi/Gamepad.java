@@ -7,9 +7,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 /** Copied by Caleb on 1/13/2017. */
 
 /**
- * Handle input from standard Joysticks connected to the Driver Station. This class handles standard
- * input that comes from the Driver Station. Each time a value is requested the most recent value is
- * returned. There is a single class instance for each joystick and the mapping of ports to hardware
+ * Handle input from standard Joysticks connected to the Driver Station. This
+ * class handles standard
+ * input that comes from the Driver Station. Each time a value is requested the
+ * most recent value is
+ * returned. There is a single class instance for each joystick and the mapping
+ * of ports to hardware
  * buttons depends on the code in the driver station.
  */
 public class Gamepad extends Joystick {
@@ -104,6 +107,30 @@ public class Gamepad extends Joystick {
     }
 
     /**
+     * Returns the direction in degrees of a control stick.
+     * Should override Joystick.getDirectionRadians().
+     * 
+     * @param xAxisValue x axis of the stick.
+     * @param yAxisValue y axis of the stick.
+     * @return double radians
+     */
+    public double getDirectionRadians(double xAxisValue, double yAxisValue) {
+        return Math.atan2(-xAxisValue, -yAxisValue);
+    }
+
+    /**
+     * Returns the direction in degrees of a control stick.
+     * Should override Joystick.getDirectionDegrees().
+     * 
+     * @param xAxisValue x axis of the stick.
+     * @param yAxisValue y axis of the stick.
+     * @return double degrees
+     */
+    public double getDirectionDegrees(double xAxisValue, double yAxisValue) {
+        return Math.toDegrees(getDirectionRadians(xAxisValue, yAxisValue));
+    }
+
+    /**
      * Checks if the specified button is pressed
      *
      * @param button the desired gamepad button
@@ -153,4 +180,3 @@ public class Gamepad extends Joystick {
         return _rightStick;
     }
 }
-

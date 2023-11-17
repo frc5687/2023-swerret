@@ -13,10 +13,8 @@ import static org.frc5687.swerret.util.Helpers.*;
 import org.frc5687.lib.oi.AxisButton;
 import org.frc5687.lib.oi.Gamepad;
 import org.frc5687.swerret.commands.*;
-import org.frc5687.swerret.commands.Turret.SetTurretHeadingMod2Pi;
-import org.frc5687.swerret.commands.Turret.SetTurretHeadingRaw;
-import org.frc5687.swerret.commands.Intake.IntakeIntake;
-import org.frc5687.swerret.commands.Intake.Shoot;
+import org.frc5687.swerret.commands.CubeShooter.Intake;
+import org.frc5687.swerret.commands.CubeShooter.Shoot;
 import org.frc5687.swerret.subsystems.*;
 import org.frc5687.swerret.util.OutliersProxy;
 
@@ -51,8 +49,8 @@ public class OI extends OutliersProxy {
 
     public void initializeButtons(
             DriveTrain drivetrain,
-            Intake intake,
-            Turret turret) {
+            Turret turret,
+            CubeShooter cubeShooter) {
         _povButtonLeft.whileTrue(new DriveWithSpeeds(drivetrain, 0, 1));
         _povButtonRight.whileTrue(new DriveWithSpeeds(drivetrain, 0, -1));
         _povButtonUp.whileTrue(new DriveWithSpeeds(drivetrain, 1, 0));
@@ -71,11 +69,8 @@ public class OI extends OutliersProxy {
         // _operatorGamepad.getYButton().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI));
         // _operatorGamepad.getXButton().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI / 2));
 
-        _operatorGamepad.getRightBumper().whileTrue(new Shoot(intake));
-        _operatorGamepad.getLeftBumper().whileTrue(new IntakeIntake(intake));
-
-        // _driverLeftTrigger.whileTrue(new IntakeIntake(intake));
-        // _driverRightTrigger.whileTrue(new Shoot(intake));
+        _driverLeftTrigger.whileTrue(new Intake(cubeShooter));
+        _driverRightTrigger.whileTrue(new Shoot(cubeShooter));
     }
 
     public boolean getSlowMode() {
@@ -104,10 +99,16 @@ public class OI extends OutliersProxy {
         return speed;
     }
 
-    public double getTurretX() {
-        double speed = -getSpeedFromAxis(_operatorGamepad, Gamepad.Axes.RIGHT_X.getNumber());
-        speed = applyDeadband(speed, Constants.DriveTrain.ROTATION_DEADBAND);
-        return speed;
+    public double getTargetTurretHeading() {
+        double angle = _driverGamepad.getDirectionRadians(
+                _driverGamepad.getRawAxis(Gamepad.Axes.LEFT_X.getNumber()),
+                _driverGamepad.getRawAxis(Gamepad.Axes.LEFT_Y.getNumber()));
+        return angle;
+    }
+
+    public boolean isTargetWithinDeadband() {
+        return Math.abs(_driverGamepad.getRawAxis(Gamepad.Axes.LEFT_X.getNumber())) < Constants.Turret.TURRET_DEADBAND 
+            && Math.abs(_driverGamepad.getRawAxis(Gamepad.Axes.LEFT_Y.getNumber())) < Constants.Turret.TURRET_DEADBAND;
     }
 
     protected double getSpeedFromAxis(Joystick gamepad, int axisNumber) {

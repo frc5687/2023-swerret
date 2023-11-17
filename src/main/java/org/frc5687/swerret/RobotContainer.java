@@ -5,8 +5,9 @@ package org.frc5687.swerret;
 import org.frc5687.swerret.commands.Drive;
 import org.frc5687.swerret.commands.OutliersCommand;
 import org.frc5687.swerret.commands.Auto.DriveForTime;
+import org.frc5687.swerret.commands.CubeShooter.IdleCubeShooter;
+import org.frc5687.swerret.commands.Turret.SetTurretHeadingContinuous;
 import org.frc5687.swerret.commands.Turret.TurretWiggle;
-import org.frc5687.swerret.commands.Intake.IdleIntake;
 import org.frc5687.swerret.subsystems.*;
 import org.frc5687.swerret.util.*;
 
@@ -24,7 +25,7 @@ public class RobotContainer extends OutliersContainer {
     private Robot _robot;
     private DriveTrain _driveTrain;
     private Turret _turret;
-    private Intake _intake;
+    private CubeShooter _cubeShooter;
     // private PhotonProcessor _photonProcessor;
     // private Trajectories _trajectories;
 
@@ -58,14 +59,15 @@ public class RobotContainer extends OutliersContainer {
 
         _driveTrain = new DriveTrain(this, _imu);
         // This is for auto temporarily, need to fix for both in future.
-        // _turret = new Turret(this);
-        _intake = new Intake(this);
+        _turret = new Turret(this);
+        _cubeShooter = new CubeShooter(this);
 
-        _oi.initializeButtons(_driveTrain, _intake, _turret);
+        _oi.initializeButtons(_driveTrain, _turret, _cubeShooter);
         // This is for auto temporarily, need to fix for both in future.
 
-        setDefaultCommand(_driveTrain, new Drive(_driveTrain, _oi));
-        setDefaultCommand(_intake, new IdleIntake(_intake));
+        // setDefaultCommand(_driveTrain, new Drive(_driveTrain, _oi));
+        setDefaultCommand(_turret, new SetTurretHeadingContinuous(_driveTrain, _turret, _oi));
+        // setDefaultCommand(_cubeShooter, new IdleCubeShooter(_cubeShooter));
 
         // _visionProcessor.start();
         _robot.addPeriodic(this::controllerPeriodic, 0.005, 0.00);
