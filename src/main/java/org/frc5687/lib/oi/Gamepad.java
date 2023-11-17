@@ -103,6 +103,10 @@ public class Gamepad extends Joystick {
         return super.getRawAxis(axis.getNumber());
     }
 
+    public double getDirectionRadians(double xAxisValue, double yAxisValue) {
+        return Math.atan2(-xAxisValue, -yAxisValue);
+    }
+
     /**
      * Checks if the specified button is pressed
      *

@@ -4,7 +4,6 @@ import org.frc5687.lib.drivers.OutliersTalon;
 import org.frc5687.swerret.Constants;
 import org.frc5687.swerret.RobotMap;
 import org.frc5687.swerret.util.HallEffect;
-import org.frc5687.swerret.util.Helpers;
 import org.frc5687.swerret.util.OutliersContainer;
 
 import edu.wpi.first.math.util.Units;
@@ -19,55 +18,55 @@ public class Turret extends OutliersSubsystem {
     public Turret(OutliersContainer container) {
         super(container);
         _motor = new OutliersTalon(RobotMap.CAN.TALONFX.TURRET, "rio", "Turret");
-        _motor.configureClosedLoop(Constants.TURRET.CONTROLLER_CONFIG);
+        _motor.configureClosedLoop(Constants.Turret.CONTROLLER_CONFIG);
 
         _hall = new HallEffect(RobotMap.DIO.TURRET_HALL);
-    } 
+    }
 
     /**
-     * Points the turret in a direction mod 2pi.
-     * For example, if you pass in 0.1 radians and the encoder is at 0.2 radians, it
-     * will go backwards.
-     * But, if the encoder is at 6.3 radians, it will go to 6.38, which is the same
-     * heading but a different encoder angle.
-     * This method keeps in mind the range of motion of the turret and will never
-     * tangle the wires
      * 
-     * @param targetHeading Target heading in radians.
+     * @param targetHeading the target heading in radians
+     * @param rangeOfMotion the amount the turret can be off from zero (a value of
+     *                      180 would mean that the turret can rotate +-180 from 0)
      */
-    public void setTurretHeadingMod2Pi(double targetHeading) {
-        if (targetHeading < Math.PI * -2 || targetHeading > Math.PI * 2) {
-            error("Turret heading can only be from -2pi to 2pi.");
-        }
-        double startingHeading = getTurretRotationRadians();
-
-        // generate three possible headings
-        // the left one is from [-2pi, 0)
-        // the center one is from [0, 2pi)
-        double rightHeading = targetHeading % (2 * Math.PI);
-        double leftHeading = rightHeading - (2 * Math.PI);
-
-        if (Math.abs(startingHeading - rightHeading) < Math.abs(startingHeading - leftHeading) && startingHeading + rightHeading < Units.degreesToRadians(300) || startingHeading + leftHeading < Units.degreesToRadians(-300)) {
-            // right target is closer
-            setTurretHeadingRaw(rightHeading);
-            error("CHOSE RIGHT HEADING");
+    public void setTurretHeadingRangeOfMotion(double targetHeading, double rangeOfMotion) {
+        double currentHeading = getTurretRotationRadians();
+        double currentHeadingMod2Pi = currentHeading % (2 * Math.PI);
+        double targetHeadingMod2Pi = targetHeading % (2 * Math.PI);
+        double newTarget;
+        if (currentHeadingMod2Pi > targetHeadingMod2Pi) {
+            if (currentHeadingMod2Pi - targetHeadingMod2Pi < (2 * Math.PI) + targetHeadingMod2Pi
+                    - currentHeadingMod2Pi) {
+                newTarget = currentHeading + targetHeadingMod2Pi - currentHeadingMod2Pi;
+            } else {
+                newTarget = currentHeading + targetHeadingMod2Pi - currentHeadingMod2Pi + (2 * Math.PI);
+            }
         } else {
-            // left target is closer
-            error("CHOSE LEFT HEADING");
-            setTurretHeadingRaw(leftHeading);
+            if (targetHeadingMod2Pi - currentHeadingMod2Pi < (2 * Math.PI) + currentHeadingMod2Pi
+                    - targetHeadingMod2Pi) {
+                newTarget = currentHeading + targetHeadingMod2Pi - currentHeadingMod2Pi;
+            } else {
+                newTarget = currentHeading + targetHeadingMod2Pi - currentHeadingMod2Pi - (2 * Math.PI);
+            }
         }
 
-        // also check if the units work, this entire method is in degrees
+        if (newTarget > rangeOfMotion) {
+            newTarget -= (2 * Math.PI) * Math.ceil((newTarget - rangeOfMotion) / (2 * Math.PI));
+        } else if (newTarget < -rangeOfMotion) {
+            newTarget += (2 * Math.PI) * Math.ceil((-rangeOfMotion - newTarget) / (2 * Math.PI));
+        }
+        
+        setTurretHeadingRaw(newTarget);
     }
 
     public void setTurretHeadingRaw(double targetHeading) {
-        if (targetHeading < Math.PI * -2 || targetHeading > Math.PI * 2) {
-            error("Raw turret heading can only be from -2pi to 2pi.");
+        if (targetHeading < Math.PI * -4 || targetHeading > Math.PI * 4) {
+            error("Raw turret heading can only be from -4pi to 4pi.");
         }
-        _motor.setMotionMagic(OutliersTalon.radiansToRotations(targetHeading, Constants.TURRET.GEAR_RATIO));
+        _motor.setMotionMagic(OutliersTalon.radiansToRotations(targetHeading, Constants.Turret.GEAR_RATIO));
     }
 
-    public void setSpeed(double speed){
+    public void setSpeed(double speed) {
         _motor.set(speed);
     }
 
@@ -78,20 +77,20 @@ public class Turret extends OutliersSubsystem {
     public boolean getHasZeroed() {
         return _hasZeroed;
     }
-    
-    public boolean getPastUpLimit(){
+
+    public boolean getPastUpLimit() {
         return _pastUpLimit;
     }
 
-    public void setPastUpLimit(boolean value){
+    public void setPastUpLimit(boolean value) {
         _pastUpLimit = value;
     }
 
-    public boolean getPastDownLimit(){
+    public boolean getPastDownLimit() {
         return _pastDownLimit;
     }
 
-    public void setPastDownLimit(boolean value){
+    public void setPastDownLimit(boolean value) {
         _pastDownLimit = value;
     }
 
@@ -111,20 +110,24 @@ public class Turret extends OutliersSubsystem {
 
     public double getTurretRotationRadians() {
         return OutliersTalon.rotationsToRadians(
-                getEncoderPositionRotations(), Constants.TURRET.GEAR_RATIO);
+                getEncoderPositionRotations(), Constants.Turret.GEAR_RATIO);
     }
 
-    public enum TurretState{
+    public double getTurretTarget() {
+        return Units.rotationsToRadians(_motor.getClosedLoopReference().getValue()) / Constants.Turret.GEAR_RATIO;
+    }
+
+    public enum TurretState {
         MANUAL(0),
         AUTOMATIC(1);
 
         private final int _value;
 
-        TurretState(int value){
+        TurretState(int value) {
             _value = value;
         }
 
-        public int getValue(){
+        public int getValue() {
             return _value;
         }
 
@@ -135,6 +138,10 @@ public class Turret extends OutliersSubsystem {
         metric("Encoder Position", getEncoderPositionRotations());
         metric("Encoder Radians", getEncoderRotationRadians());
         metric("Turret Radians", getTurretRotationRadians());
+        metric("Turret Degrees", Units.radiansToDegrees(getTurretRotationRadians()));
+        metric("Turret Target Radians", getTurretTarget());
+        metric("Turret Target Degrees", Units.radiansToDegrees(getTurretTarget()));
+        metric("Turret Difference", getTurretTarget() - Units.radiansToDegrees(getTurretRotationRadians()));
         metric("Hall", getHall());
         metric("Motor Output", _motor.get());
         metric("Calibrated", _hasZeroed);
@@ -152,15 +159,16 @@ public class Turret extends OutliersSubsystem {
             }
         }
 
-        // Should the turret spin past, tells the console and sets the boolean to true depending on which direction - Simeon
-        if (getTurretRotationRadians() > (Units.degreesToRadians(200))){
+        // Should the turret spin past, tells the console and sets the boolean to true
+        // depending on which direction - Simeon
+        if (getTurretRotationRadians() > (Units.degreesToRadians(200))) {
             // error("BRO TURN BACK ITS TOO FAR UP!!");
             // setPastUpLimit(true);
         } else {
             // setPastUpLimit(false);
         }
 
-        if (getTurretRotationRadians() < (Units.degreesToRadians(-200))){
+        if (getTurretRotationRadians() < (Units.degreesToRadians(-200))) {
             // error("BRO TURN BACK ITS TOO FAR DOWN!!");
             // setPastDownLimit(true);
         } else {

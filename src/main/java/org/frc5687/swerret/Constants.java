@@ -49,7 +49,7 @@ public class Constants {
         public static final double SWERVE_NS_POS = LENGTH / 2.0;
         public static final double SWERVE_WE_POS = WIDTH / 2.0;
 
-        public static final double MAX_MPS = 0.6; // Max speed of robot (m/s)
+        public static final double MAX_MPS = 4; // Max speed of robot (m/s)
         public static final double SLOW_MPS = MAX_MPS / 2; // Slow speed of robot (m/s)
         public static final double MAX_ANG_VEL = Math.PI; // Max rotation rate of robot (rads/s)
         public static final double SLOW_ANG_VEL = Math.PI; // Max rotation rate of robot (rads/s)
@@ -269,7 +269,7 @@ public class Constants {
         public static final double MAX_MODULE_JERK = MAX_MODULE_ACCELERATION * 2;
     }
 
-    public static class TURRET {
+    public static class Turret {
         public static final OutliersTalon.ClosedLoopConfiguration CONTROLLER_CONFIG = new OutliersTalon.ClosedLoopConfiguration();
 
         static {
@@ -285,59 +285,36 @@ public class Constants {
             CONTROLLER_CONFIG.JERK = 3200;
         }
 
-        public static final double GEAR_RATIO = 56.0;
+        public static final double GEAR_RATIO = 54.5;
         public static final double ANGLE_TOLERANCE = 0.05;
+        public static final double TURRET_DEADBAND = 0.2;
+        public static final double RANGE_OF_MOTION = Math.PI * 3.0;
     }
 
-    public static class Intake {
-        public static final double IN_SPEED = -0.458;
-        public static final double OUT_SPEED = 1.0;
-        public static final double IDLESPEED = -0.05;
+    public static class Shooter {
 
-        public static final OutliersTalon.Configuration TOP_CONFIG = new OutliersTalon.Configuration();
+        public static final double ARM_GEAR_RATIO = 30.0;
+        public static final double ROLLER_GEAR_RATIO = 7.2;
+        public static final double INTAKE_ANGLE_RAD = -4.2; 
+        public static final double SHOOT_ANGLE_RAD = -2.85;
+        public static final double IDLE_ANGLE_RAD = -2.85;
+        public static final double INTAKE_ROLLER_SPEED = 0.0; //TODO: CHANGE THIS PWEASE
+        public static final double SHOOT_ROLLER_SPEED = 0.0; //TODO: CHANGE THIS PWEASE
+        public static final double IDLE_ROLLER_SPEED = 0.0; //TODO: CHANGE THIS PWEASE
 
-        static {
-            TOP_CONFIG.TIME_OUT = 0.1;
-
-            TOP_CONFIG.NEUTRAL_MODE = NeutralModeValue.Brake;
-            TOP_CONFIG.INVERTED = InvertedValue.Clockwise_Positive;
-
-            TOP_CONFIG.MAX_VOLTAGE = 12.0;
-
-            TOP_CONFIG.MAX_STATOR_CURRENT = 60;
-            TOP_CONFIG.ENABLE_STATOR_CURRENT_LIMIT = true;
-            TOP_CONFIG.USE_FOC = true;
-        }
-
-        public static final OutliersTalon.ClosedLoopConfiguration CONTROLLER_CONFIG_TOP = new OutliersTalon.ClosedLoopConfiguration();
+        public static final OutliersTalon.ClosedLoopConfiguration CONTROLLER_CONFIG = new OutliersTalon.ClosedLoopConfiguration();
 
         static {
-            CONTROLLER_CONFIG_TOP.CRUISE_VELOCITY = 101;
-            CONTROLLER_CONFIG_TOP.ACCELERATION = 400;
-            CONTROLLER_CONFIG_TOP.JERK = 2500;
-        }
+            CONTROLLER_CONFIG.SLOT = 0;
 
-        public static final OutliersTalon.Configuration BOTTOM_CONFIG = new OutliersTalon.Configuration();
+            CONTROLLER_CONFIG.kP = 1.3;
+            CONTROLLER_CONFIG.kI = 0;
+            CONTROLLER_CONFIG.kD = 0.0;
+            CONTROLLER_CONFIG.kF = 0.0;
 
-        static {
-            TOP_CONFIG.TIME_OUT = 0.1;
-
-            TOP_CONFIG.NEUTRAL_MODE = NeutralModeValue.Brake;
-            TOP_CONFIG.INVERTED = InvertedValue.Clockwise_Positive;
-
-            TOP_CONFIG.MAX_VOLTAGE = 12.0;
-
-            TOP_CONFIG.MAX_STATOR_CURRENT = 60;
-            TOP_CONFIG.ENABLE_STATOR_CURRENT_LIMIT = true;
-            TOP_CONFIG.USE_FOC = true;
-        }
-
-        public static final OutliersTalon.ClosedLoopConfiguration CONTROLLER_CONFIG_BOTTOM = new OutliersTalon.ClosedLoopConfiguration();
-
-        static {
-            CONTROLLER_CONFIG_TOP.CRUISE_VELOCITY = 101;
-            CONTROLLER_CONFIG_TOP.ACCELERATION = 400;
-            CONTROLLER_CONFIG_TOP.JERK = 2500;
+            CONTROLLER_CONFIG.CRUISE_VELOCITY = 50;
+            CONTROLLER_CONFIG.ACCELERATION = 600;
+            CONTROLLER_CONFIG.JERK = 3200;
         }
     }
 }

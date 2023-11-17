@@ -24,8 +24,8 @@ public class RobotMap {
                         public static final int SOUTH_WEST_INNER = 5;
                         public static final int SOUTH_WEST_OUTER = 6;
                         public static final int TURRET = 9;
-                        public static final int TOP_INTAKE = 10;
-                        public static final int BOTTOM_INTAKE = 11;
+                        public static final int SHOOTER_ARM = 10;
+                        public static final int SHOOTER_ROLLER = 11;
                 }
 
                 public static class PIGEON {
@@ -88,7 +88,7 @@ public class RobotMap {
                 public static final int ENCODER_SE = 7; // takes up 3 slots ABS, A, B channels.
                 public static final int ENCODER_SW = 10; // takes up 3 slots ABS, A, B channels.
 
-                public static final int TURRET_HALL = 9;
+                public static final int TURRET_HALL = 0;
                 public static final int INTAKE_PROXIMITY_SENSOR = 13;
         }
 }
