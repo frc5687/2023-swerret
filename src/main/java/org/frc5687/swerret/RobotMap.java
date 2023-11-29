@@ -90,5 +90,6 @@ public class RobotMap {
 
                 public static final int TURRET_HALL = 0;
                 // public static final int INTAKE_PROXIMITY_SENSOR = 13;
+                public static final int CUBESHOOTER_PROXIMITY = 13;
         }
 }
