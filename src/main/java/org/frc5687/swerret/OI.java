@@ -65,9 +65,12 @@ public class OI extends OutliersProxy {
         _driverGamepad.getAButton().onTrue(new SnapTo(drivetrain, new Rotation2d(Units.degreesToRadians(180))));
 
         // _operatorGamepad.getAButton().onTrue(new SetTurretHeadingMod2Pi(turret, 0));
-        // _operatorGamepad.getBButton().onTrue(new SetTurretHeadingMod2Pi(turret, -Math.PI / 2));
-        // _operatorGamepad.getYButton().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI));
-        // _operatorGamepad.getXButton().onTrue(new SetTurretHeadingMod2Pi(turret, Math.PI / 2));
+        // _operatorGamepad.getBButton().onTrue(new SetTurretHeadingMod2Pi(turret,
+        // -Math.PI / 2));
+        // _operatorGamepad.getYButton().onTrue(new SetTurretHeadingMod2Pi(turret,
+        // Math.PI));
+        // _operatorGamepad.getXButton().onTrue(new SetTurretHeadingMod2Pi(turret,
+        // Math.PI / 2));
 
         _driverLeftTrigger.whileTrue(new Intake(cubeShooter));
         _driverRightTrigger.whileTrue(new Shoot(cubeShooter));
@@ -106,15 +109,19 @@ public class OI extends OutliersProxy {
     }
 
     public double getTargetTurretHeading() {
+        // these negatives are a quick and dirty way to rotate the angle by 180
+        // while still staying in the same range
+        // xavier bradford 11/29/23
         double angle = _driverGamepad.getDirectionRadians(
-                _driverGamepad.getRawAxis(Gamepad.Axes.LEFT_X.getNumber()),
-                _driverGamepad.getRawAxis(Gamepad.Axes.LEFT_Y.getNumber()));
+                -_driverGamepad.getRawAxis(Gamepad.Axes.LEFT_X.getNumber()),
+                -_driverGamepad.getRawAxis(Gamepad.Axes.LEFT_Y.getNumber()));
         return angle;
     }
 
     public boolean isTargetWithinDeadband() {
-        return Math.abs(_driverGamepad.getRawAxis(Gamepad.Axes.LEFT_X.getNumber())) < Constants.Turret.TURRET_DEADBAND 
-            && Math.abs(_driverGamepad.getRawAxis(Gamepad.Axes.LEFT_Y.getNumber())) < Constants.Turret.TURRET_DEADBAND;
+        return Math.abs(_driverGamepad.getRawAxis(Gamepad.Axes.LEFT_X.getNumber())) < Constants.Turret.TURRET_DEADBAND
+                && Math.abs(
+                        _driverGamepad.getRawAxis(Gamepad.Axes.LEFT_Y.getNumber())) < Constants.Turret.TURRET_DEADBAND;
     }
 
     protected double getSpeedFromAxis(Joystick gamepad, int axisNumber) {

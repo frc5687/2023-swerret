@@ -55,7 +55,7 @@ public class Turret extends OutliersSubsystem {
         } else if (newTarget < -rangeOfMotion) {
             newTarget += (2 * Math.PI) * Math.ceil((-rangeOfMotion - newTarget) / (2 * Math.PI));
         }
-        
+
         setTurretHeadingRaw(newTarget);
     }
 
@@ -152,11 +152,14 @@ public class Turret extends OutliersSubsystem {
         super.periodic();
         if (_hall.get()) {
 
-            if (!_hasZeroed) {
-                warn("Turret _hall activated. Encoder position pre-zero: " + getEncoderPositionRotations());
-                zeroEncoder();
-                setTurretHeadingRaw(0);
-            }
+            // removed checking if the turret has already been zeroed because
+            // the belt was slipping. This could mean that for the couple degrees
+            // that the hall effect sensor is active the position will be 0
+            // xavier bradford 11/29/23
+            warn("Turret _hall activated. Encoder position pre-zero: " + getEncoderPositionRotations());
+            zeroEncoder();
+            setTurretHeadingRaw(0);
+
         }
 
         // Should the turret spin past, tells the console and sets the boolean to true
