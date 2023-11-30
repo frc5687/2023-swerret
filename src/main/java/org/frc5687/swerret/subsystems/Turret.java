@@ -55,7 +55,7 @@ public class Turret extends OutliersSubsystem {
         } else if (newTarget < -rangeOfMotion) {
             newTarget += (2 * Math.PI) * Math.ceil((-rangeOfMotion - newTarget) / (2 * Math.PI));
         }
-        
+
         setTurretHeadingRaw(newTarget);
     }
 
@@ -151,12 +151,12 @@ public class Turret extends OutliersSubsystem {
     public void periodic() {
         super.periodic();
         if (_hall.get()) {
-
             if (!_hasZeroed) {
                 warn("Turret _hall activated. Encoder position pre-zero: " + getEncoderPositionRotations());
                 zeroEncoder();
                 setTurretHeadingRaw(0);
             }
+
         }
 
         // Should the turret spin past, tells the console and sets the boolean to true
