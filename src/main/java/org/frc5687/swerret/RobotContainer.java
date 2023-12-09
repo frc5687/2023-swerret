@@ -8,14 +8,10 @@ import com.pathplanner.lib.PathConstraints;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-// import org.frc5687.swerret.commands.Arm.ManualDriveArm;
 import org.frc5687.swerret.commands.Auto.*;
-// import org.frc5687.swerret.commands.CubeShooter.IdleWrist;
 import org.frc5687.swerret.commands.Drive;
-// import org.frc5687.swerret.commands.DriveLights;
-// import org.frc5687.swerret.commands.Elevator.ManualExtendElevator;
-// import org.frc5687.swerret.commands.EndEffector.IdleGripper;
 import org.frc5687.swerret.commands.OutliersCommand;
+import org.frc5687.swerret.commands.TestModule;
 import org.frc5687.swerret.subsystems.*;
 import org.frc5687.swerret.util.*;
 import org.frc5687.swerret.util.AutoChooser.AutoType;
@@ -34,6 +30,7 @@ public class RobotContainer extends OutliersContainer {
     // private Lights _lights;
     // private LightsExample _lights;
     private DriveTrain _driveTrain;
+    private TestyModule _testModule;
     // private EndEffector _endEffector;
     // private CubeShooter _cubeShooter;
     // private Arm _arm;
@@ -73,22 +70,20 @@ public class RobotContainer extends OutliersContainer {
         _imu.getConfigurator().apply(pigeonConfig);
 
         _driveTrain = new DriveTrain(this, /*_visionProcessor, _photonProcessor, */ _imu);
-        // _elevator = new Elevator(this);
-        // _arm = new Arm(this);
-        // _cubeShooter = new CubeShooter(this);
-        // _endEffector = new EndEffector(this);
-        // _lights = new Lights(this, _driveTrain, _endEffector, _oi);
-        // This is for auto temporarily, need to fix for both in future.
-        // _endEffector.setCubeState();
+        _testModule = new TestyModule(
+            this, 
+            new SwerveModule(
+                Constants.DriveTrain.NORTH_WEST_CONFIG, 
+                RobotMap.CAN.TALONFX.NORTH_WEST_ROTATION, 
+                RobotMap.CAN.TALONFX.NORTH_WEST_TRANSLATION, 
+                RobotMap.CAN.CANCODER.ENCODER_NW
+            )
+        );
 
         setDefaultCommand(_driveTrain, new Drive(_driveTrain, /*_endEffector,*/ _oi));
-        // setDefaultCommand(_elevator, new ManualExtendElevator(_elevator, _oi));
-        // setDefaultCommand(_arm, new ManualDriveArm(_arm, _oi));
-        // setDefaultCommand(_endEffector, new IdleGripper(_endEffector, _oi));
-        // setDefaultCommand(_lights, new DriveLights(_endEffector, _lights, _driveTrain, _oi));
-        // setDefaultCommand(_cubeShooter, new IdleWrist(_cubeShooter, _driveTrain, _endEffector));
+        // setDefaultCommand(_testModule, new TestModule(_testModule, _oi));
 
-        // _oi.initializeButtons(_driveTrain, _endEffector, _arm, _elevator, _cubeShooter, _lights);
+        // _oi.initializeButtons(_driveTrain);
 
         // _visionProcessor.start();
         startPeriodic();
