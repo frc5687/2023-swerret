@@ -15,12 +15,12 @@ public class RobotMap {
         public static class CAN {
 
                 public static class TALONFX {
-                        public static final int NORTH_WEST_ROTATION = 0;
-                        public static final int NORTH_WEST_TRANSLATION = 1;
+                        public static final int SOUTH_EAST_ROTATION = 0;
+                        public static final int SOUTH_EAST_TRANSLATION = 1;
                         public static final int NORTH_EAST_ROTATION = 2;
                         public static final int NORTH_EAST_TRANSLATION = 3;
-                        public static final int SOUTH_EAST_ROTATION = 4;
-                        public static final int SOUTH_EAST_TRANSLATION = 5;
+                        public static final int NORTH_WEST_ROTATION = 4;
+                        public static final int NORTH_WEST_TRANSLATION = 5;
                         public static final int SOUTH_WEST_ROTATION = 6;
                         public static final int SOUTH_WEST_TRANSLATION = 7;
 

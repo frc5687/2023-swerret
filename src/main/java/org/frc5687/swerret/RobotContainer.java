@@ -5,6 +5,8 @@ package org.frc5687.swerret;
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.PathConstraints;
+
+import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -69,16 +71,16 @@ public class RobotContainer extends OutliersContainer {
         var pigeonConfig = new Pigeon2Configuration();
         _imu.getConfigurator().apply(pigeonConfig);
 
-        _driveTrain = new DriveTrain(this, /*_visionProcessor, _photonProcessor, */ _imu);
-        _testModule = new TestyModule(
-            this, 
-            new SwerveModule(
-                Constants.DriveTrain.NORTH_WEST_CONFIG, 
-                RobotMap.CAN.TALONFX.NORTH_WEST_ROTATION, 
-                RobotMap.CAN.TALONFX.NORTH_WEST_TRANSLATION, 
-                RobotMap.CAN.CANCODER.ENCODER_NW
-            )
-        );
+        _driveTrain = new DriveTrain(this, /*_visionProcessor, */_photonProcessor, _imu);
+        // _testModule = new TestyModule(
+        //     this, 
+        //     new SwerveModule(
+        //         Constants.DriveTrain.NORTH_WEST_CONFIG, 
+        //         RobotMap.CAN.TALONFX.NORTH_WEST_ROTATION, 
+        //         RobotMap.CAN.TALONFX.NORTH_WEST_TRANSLATION, 
+        //         RobotMap.CAN.CANCODER.ENCODER_NW
+        //     )
+        // );
 
         setDefaultCommand(_driveTrain, new Drive(_driveTrain, /*_endEffector,*/ _oi));
         // setDefaultCommand(_testModule, new TestModule(_testModule, _oi));
