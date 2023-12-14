@@ -22,11 +22,14 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.trajectory.constraint.SwerveDriveKinematicsConstraint;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.ArrayList;
@@ -54,6 +57,8 @@ public class DriveTrain extends OutliersSubsystem {
     private static final int SOUTH_EAST_IDX = 2;
     private static final int NORTH_EAST_IDX = 3;
     private final DoubleSolenoid _shift;
+    private final PneumaticHub _pneumaticHub;
+    private final Compressor _compressor;
     private final SwerveModule[] _modules;
     private final SwerveDriveKinematics _kinematics;
     private final SwerveDriveOdometry _odometry;
@@ -94,6 +99,8 @@ public class DriveTrain extends OutliersSubsystem {
 
     private boolean _hasShiftInit = false;
 
+    private boolean _hasPressure = false;
+
     public DriveTrain(
             OutliersContainer container,
             // VisionProcessor processor,
@@ -106,6 +113,10 @@ public class DriveTrain extends OutliersSubsystem {
 
         _shift = new DoubleSolenoid(PneumaticsModuleType.REVPH,
                 RobotMap.PCM.SHIFTER_HIGH, RobotMap.PCM.SHIFTER_LOW);
+        _pneumaticHub = new PneumaticHub();
+        _compressor = new Compressor(2, PneumaticsModuleType.REVPH);
+        _compressor.enableDigital();
+        // _pneumaticHub.enableCompressorDigital();
 
         // configure our system IO and pigeon;
         _imu = imu;
@@ -282,6 +293,12 @@ public class DriveTrain extends OutliersSubsystem {
     @Override
     public void periodic() {
         super.periodic();
+        // _pneumaticHub.disableCompressor();
+        // _pneumaticHub.enableCompressorDigital();
+        // _compressor.get
+        if (!_compressor.getPressureSwitchValue()){
+            _compressor.disable();
+        } 
         if (!_hasShiftInit) {
             shiftDownModules();
             _hasShiftInit = true;
