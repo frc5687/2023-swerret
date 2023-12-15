@@ -111,9 +111,10 @@ public class DriveTrain extends OutliersSubsystem {
         // _visionProcessor = processor;
         _photonProcessor = photonProcessor;
 
-        _shift = new DoubleSolenoid(PneumaticsModuleType.REVPH,
+        _shift = new DoubleSolenoid(2, PneumaticsModuleType.REVPH,
                 RobotMap.PCM.SHIFTER_HIGH, RobotMap.PCM.SHIFTER_LOW);
-        _pneumaticHub = new PneumaticHub();
+        _pneumaticHub = new PneumaticHub(2);
+        // _pneumaticHub.makeDoubleSolenoid(RobotMap.PCM.SHIFTER_HIGH, RobotMap.PCM.SHIFTER_LOW);
         _compressor = new Compressor(2, PneumaticsModuleType.REVPH);
         _compressor.enableDigital();
         // _pneumaticHub.enableCompressorDigital();
@@ -385,6 +386,8 @@ public class DriveTrain extends OutliersSubsystem {
 
     public void shiftUpModules() {
         _shift.set(Value.kForward);
+        // _pneumaticHub.setSolenoids(0, 1);
+        // _pneumaticHub.setSolenoids(15, 0);
         _isLowGear = false;
         setKinematicLimits(HIGH_KINEMATIC_LIMITS);
         for (int i = 0; i < _modules.length; i++) {
@@ -394,6 +397,8 @@ public class DriveTrain extends OutliersSubsystem {
 
     public void shiftDownModules() {
         _shift.set(Value.kReverse);
+        // _pneumaticHub.setSolenoids(0, 0);
+        // _pneumaticHub.setSolenoids(15, 1);
         setKinematicLimits(LOW_KINEMATIC_LIMITS);
         for (int i = 0; i < _modules.length; i++) {
             _modules[i].setLowGear(true);

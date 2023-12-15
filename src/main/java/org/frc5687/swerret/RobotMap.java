@@ -31,8 +31,8 @@ public class RobotMap {
                 }
 
                 public static class CANCODER {
-                        public static final int ENCODER_NW = 0;
-                        public static final int ENCODER_SE = 1; // 1
+                        public static final int ENCODER_NW = 1;
+                        public static final int ENCODER_SE = 0; // 1
                         public static final int ENCODER_SW = 2;
                         public static final int ENCODER_NE = 3;
                 }

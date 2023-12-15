@@ -85,7 +85,7 @@ public class RobotContainer extends OutliersContainer {
         setDefaultCommand(_driveTrain, new Drive(_driveTrain, /*_endEffector,*/ _oi));
         // setDefaultCommand(_testModule, new TestModule(_testModule, _oi));
 
-        // _oi.initializeButtons(_driveTrain);
+        _oi.initializeButtons(_driveTrain);
 
         // _visionProcessor.start();
         startPeriodic();
