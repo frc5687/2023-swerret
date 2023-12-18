@@ -34,43 +34,51 @@ public class PhotonProcessor {
         //_executorService = Executors.newFixedThreadPool(NUM_CAMERAS);
 
         setPipeline(Pipeline.FAR);
-
+        // new values taken from z to floor
         // old values
         Transform3d robotToNorthCam =
-                new Transform3d(new Translation3d(-0.2, .14, 0.73), new Rotation3d(0, 0, 0));
+            new Transform3d(
+                new Translation3d(0.08, 0.09, 0.62),
+                new Rotation3d(0, 0, 0)
+            );
         Transform3d robotToSouthCam =
-                new Transform3d(new Translation3d(-0.025, -0.144, 0.7), new Rotation3d(0, 0, Units.degreesToRadians(0)));
+            new Transform3d(
+                new Translation3d(0.00, 0.09, 0.57), 
+                new Rotation3d(0, 0, Math.PI)
+            );
 
         Transform3d robotToWestCam =
-                new Transform3d(
-                        new Translation3d(-.243, .249, .442),
-                        new Rotation3d(0, 0, Units.degreesToRadians(-140)));
+            new Transform3d(
+                new Translation3d(0.04, 0.12, 0.52),
+                new Rotation3d(0, 0, 0.5 * Math.PI)
+            );
 
         Transform3d robotToEastCam =
-                new Transform3d(
-                        new Translation3d(-.243, -.249, .442),
-                        new Rotation3d(0, 0, Units.degreesToRadians(140)));
+            new Transform3d(
+                new Translation3d(0.04, 0.05, 0.47),
+                new Rotation3d(0, 0, 1.5 * Math.PI)
+            );
 
         _northCameraEstimator =
-                new PhotonPoseEstimator(
-                        layout,
-                        PhotonPoseEstimator.PoseStrategy.MULTI_TAG_PNP,
-                        _northCamera,
-                        robotToNorthCam);
+            new PhotonPoseEstimator(
+                layout,
+                PhotonPoseEstimator.PoseStrategy.MULTI_TAG_PNP,
+                _northCamera,
+                robotToNorthCam);
 
         _southCameraEstimator =
-                new PhotonPoseEstimator(
-                        layout,
-                        PhotonPoseEstimator.PoseStrategy.MULTI_TAG_PNP,
-                        _southCamera,
-                        robotToSouthCam);
+            new PhotonPoseEstimator(
+                layout,
+                PhotonPoseEstimator.PoseStrategy.MULTI_TAG_PNP,
+                _southCamera,
+                robotToSouthCam);
 
         _westCameraEstimator =
-                new PhotonPoseEstimator(
-                        layout,
-                        PhotonPoseEstimator.PoseStrategy.MULTI_TAG_PNP,
-                        _westCamera,
-                        robotToWestCam);
+            new PhotonPoseEstimator(
+                layout,
+                PhotonPoseEstimator.PoseStrategy.MULTI_TAG_PNP,
+                _westCamera,
+                robotToWestCam);
 
         _eastCameraEstimator =
                 new PhotonPoseEstimator(
@@ -156,7 +164,7 @@ public class PhotonProcessor {
     }
 
     public CompletableFuture<Optional<EstimatedRobotPose>> getWestCameraEstimatedGlobalPoseAsync(
-            Pose2d prevEstimatedPose) {
+                Pose2d prevEstimatedPose) {
         return CompletableFuture.supplyAsync(
                 () -> getWestCameraEstimatedGlobalPose(prevEstimatedPose));
     }

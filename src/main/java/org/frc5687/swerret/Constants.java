@@ -121,6 +121,18 @@ public class Constants {
             POV_KINEMATIC_LIMITS.maxSteeringVelocity = 10; // rad/s
         }
 
+        /*
+         * How to find offsets:
+         * 
+         * 1) Set the offset in code to 0
+         * 2) Find your CANcoder on Phoenix Tuner X by its device ID
+         * 3) Open the Plot window and check the Position box
+         * 4) Turn the module back to its intended position
+         * 5) Set the offset in code to the opposite of what Phoenix Tuner is reading ex. -0.5 should be 0.5 in code
+         * 6) Repeat with all []\
+         * modules
+         */
+
         public static final ModuleConfiguration NORTH_WEST_CONFIG = new ModuleConfiguration();
 
         static {
@@ -129,7 +141,7 @@ public class Constants {
             NORTH_WEST_CONFIG.position = new Translation2d(SWERVE_NS_POS, SWERVE_WE_POS); // +,+
 
             NORTH_WEST_CONFIG.encoderInverted = false;
-            NORTH_WEST_CONFIG.encoderOffset = 0.270508;
+            NORTH_WEST_CONFIG.encoderOffset = 0.242666;
         }
 
         public static final ModuleConfiguration SOUTH_WEST_CONFIG = new ModuleConfiguration();
@@ -151,7 +163,7 @@ public class Constants {
             SOUTH_EAST_CONFIG.position = new Translation2d(-SWERVE_NS_POS, -SWERVE_WE_POS); // -,-
 
             SOUTH_EAST_CONFIG.encoderInverted = false;
-            SOUTH_EAST_CONFIG.encoderOffset = 0.118652;
+            SOUTH_EAST_CONFIG.encoderOffset = 0.2697754;
         }
 
         public static final ModuleConfiguration NORTH_EAST_CONFIG = new ModuleConfiguration();
