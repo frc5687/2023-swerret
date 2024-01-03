@@ -68,7 +68,7 @@ public class RobotContainer extends OutliersContainer {
 
         setDefaultCommand(_driveTrain, new Drive(_driveTrain, _oi));
         setDefaultCommand(_turret, new SetTurretHeadingContinuous(_driveTrain, _turret, _oi));
-        // setDefaultCommand(_cubeShooter, new IdleCubeShooter(_cubeShooter));
+        setDefaultCommand(_cubeShooter, new IdleCubeShooter(_cubeShooter));
 
         // _visionProcessor.start();
         _robot.addPeriodic(this::controllerPeriodic, 0.005, 0.00);

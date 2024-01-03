@@ -14,12 +14,17 @@ public class Intake extends OutliersCommand {
 
     @Override
     public void initialize() {
-        _cubeShooter.setShooterAngleRadians(Constants.Shooter.INTAKE_ANGLE_RAD);
+        // _cubeShooter.setShooterAngleRadians(Constants.Shooter.INTAKE_ANGLE_RAD);
         _cubeShooter.setRollerSpeed(Constants.Shooter.INTAKE_ROLLER_SPEED);
     }
 
     @Override
     public boolean isFinished() {
         return false;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        error("intake done" + interrupted);
     }
 }

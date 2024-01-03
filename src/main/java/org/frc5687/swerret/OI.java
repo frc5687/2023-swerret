@@ -85,13 +85,13 @@ public class OI extends OutliersProxy {
     }
 
     public double getDriveY() {
-        double speed = getSpeedFromAxis(_driverGamepad, Gamepad.Axes.LEFT_Y.getNumber());
+        double speed = -getSpeedFromAxis(_driverGamepad, Gamepad.Axes.LEFT_Y.getNumber());
         speed = applyDeadband(speed, Constants.DriveTrain.TRANSLATION_DEADBAND);
         return speed;
     }
 
     public double getDriveX() {
-        double speed = getSpeedFromAxis(_driverGamepad, Gamepad.Axes.LEFT_X.getNumber());
+        double speed = -getSpeedFromAxis(_driverGamepad, Gamepad.Axes.LEFT_X.getNumber());
         speed = applyDeadband(speed, Constants.DriveTrain.TRANSLATION_DEADBAND);
         return speed;
     }
@@ -113,8 +113,8 @@ public class OI extends OutliersProxy {
         // while still staying in the same range
         // xavier bradford 11/29/23
         double angle = _driverGamepad.getDirectionRadians(
-                -_driverGamepad.getRawAxis(Gamepad.Axes.LEFT_X.getNumber()),
-                -_driverGamepad.getRawAxis(Gamepad.Axes.LEFT_Y.getNumber()));
+                _driverGamepad.getRawAxis(Gamepad.Axes.LEFT_X.getNumber()),
+                _driverGamepad.getRawAxis(Gamepad.Axes.LEFT_Y.getNumber()));
         return angle;
     }
 

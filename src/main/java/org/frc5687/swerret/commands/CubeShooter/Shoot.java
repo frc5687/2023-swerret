@@ -14,12 +14,17 @@ public class Shoot extends OutliersCommand {
 
     @Override
     public void initialize() {
-        _cubeShooter.setShooterAngleRadians(Constants.Shooter.SHOOT_ANGLE_RAD);
+        // _cubeShooter.setShooterAngleRadians(Constants.Shooter.SHOOT_ANGLE_RAD);
         _cubeShooter.setRollerSpeed(Constants.Shooter.SHOOT_ROLLER_SPEED);
     }
 
     @Override
     public boolean isFinished() {
         return false;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        error("shoot done" + interrupted);
     }
 }

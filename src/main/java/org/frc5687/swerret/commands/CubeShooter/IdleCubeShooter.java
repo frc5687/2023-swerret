@@ -13,7 +13,7 @@ public class IdleCubeShooter extends OutliersCommand {
 
     @Override
     public void initialize() {
-        _cubeShooter.setShooterAngleRadians(Constants.Shooter.IDLE_ANGLE_RAD);
+        // _cubeShooter.setShooterAngleRadians(Constants.Shooter.IDLE_ANGLE_RAD);
         _cubeShooter.setRollerSpeed(Constants.Shooter.IDLE_ROLLER_SPEED);
     }
 

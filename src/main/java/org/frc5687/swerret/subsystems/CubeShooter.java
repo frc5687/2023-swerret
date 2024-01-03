@@ -14,7 +14,7 @@ public class CubeShooter extends OutliersSubsystem {
     public CubeShooter(OutliersContainer container) {
         super(container);
         _armMotor = new OutliersTalon(RobotMap.CAN.TALONFX.SHOOTER_ARM, "rio", "arm");
-        _armMotor.configureClosedLoop(Constants.Shooter.CONTROLLER_CONFIG);
+        // _armMotor.configureClosedLoop(Constants.Shooter.CONTROLLER_CONFIG);
         _rollerMotor = new OutliersTalon(RobotMap.CAN.TALONFX.SHOOTER_ROLLER, "rio", "roller");
         _prox = new ProximitySensor(RobotMap.DIO.CUBESHOOTER_PROXIMITY);
     }
@@ -49,5 +49,6 @@ public class CubeShooter extends OutliersSubsystem {
         metric("Arm Encoder Radians", getArmEncoderPositionRadians());
         metric("Arm Angle Radians", getArmPositionRadians());
         metric("Roller Speed", _rollerMotor.get());
+        metric("Prox Value", getProximitySensor());
     }
 }
