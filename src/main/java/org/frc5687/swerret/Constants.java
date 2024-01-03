@@ -309,7 +309,7 @@ public class Constants {
             DRIVE_CONTROLLER_CONFIG.kD = 0.02;
             DRIVE_CONTROLLER_CONFIG.kF = 0.0;
             // use these PID values when shifted up
-            DRIVE_CONTROLLER_CONFIG.kP1 = 11.0;
+            DRIVE_CONTROLLER_CONFIG.kP1 = 23.0;
             DRIVE_CONTROLLER_CONFIG.kI1 = 0;
             DRIVE_CONTROLLER_CONFIG.kD1 = 0.02;
 
