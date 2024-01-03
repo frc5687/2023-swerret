@@ -227,6 +227,7 @@ public class SwerveModule {
 
     public void setLowGear(boolean isLowGear){
         _isLowGear = isLowGear;
+        _velocityTorqueCurrentFOC = _velocityTorqueCurrentFOC.withSlot(isLowGear ? 0 : 1);
     }
 
     public double getDriveRPM() {

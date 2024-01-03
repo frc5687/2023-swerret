@@ -301,7 +301,7 @@ public class Constants {
         public static final OutliersTalon.ClosedLoopConfiguration DRIVE_CONTROLLER_CONFIG = new OutliersTalon.ClosedLoopConfiguration();
 
         static {
-            DRIVE_CONTROLLER_CONFIG.SLOT = 0;
+        //     DRIVE_CONTROLLER_CONFIG.SLOT = 0;
 
             // use these PID values when shifted down
             DRIVE_CONTROLLER_CONFIG.kP = 11.0;// 11.0 //23.0
@@ -309,7 +309,7 @@ public class Constants {
             DRIVE_CONTROLLER_CONFIG.kD = 0.02;
             DRIVE_CONTROLLER_CONFIG.kF = 0.0;
             // use these PID values when shifted up
-            DRIVE_CONTROLLER_CONFIG.kP1 = 23.0;
+            DRIVE_CONTROLLER_CONFIG.kP1 = 58.0;
             DRIVE_CONTROLLER_CONFIG.kI1 = 0;
             DRIVE_CONTROLLER_CONFIG.kD1 = 0.02;
 
