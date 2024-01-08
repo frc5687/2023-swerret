@@ -57,21 +57,21 @@ public class Constants {
         public static final double SWERVE_NS_POS = LENGTH / 2.0;
         public static final double SWERVE_WE_POS = WIDTH / 2.0;
 
-        public static final double MAX_MPS = 6.0; // Max speed of robot (m/s)
+        public static final double MAX_MPS = 6.5; // Max speed of robot (m/s)
         public static final double MAX_LOW_GEAR_MPS = 3.5;
         public static final double MAX_HIGH_GEAR_MPS = 6.5; // 6.85
         public static final double SLOW_MPS = 2.0; // Slow speed of robot (m/s)
         public static final double MAX_ANG_VEL = Math.PI; // Max rotation rate of robot (rads/s)
         public static final double SLOW_ANG_VEL = Math.PI; // Max rotation rate of robot (rads/s)
 
-        public static final double SHIFT_UP_SPEED_MPS = 2.3; // Speed to start shift y
+        public static final double SHIFT_UP_SPEED_MPS = 2.0; // Speed to start shift y
         public static final double SHIFT_DOWN_SPEED_MPS = 1.75; // Speed to start shift y
 
         public static final KinematicLimits HIGH_KINEMATIC_LIMITS = new KinematicLimits();
 
         static {
             HIGH_KINEMATIC_LIMITS.maxDriveVelocity = MAX_HIGH_GEAR_MPS; // m/s
-            HIGH_KINEMATIC_LIMITS.maxDriveAcceleration = 30; // m/s^2
+            HIGH_KINEMATIC_LIMITS.maxDriveAcceleration = 45; // m/s^2
             HIGH_KINEMATIC_LIMITS.maxSteeringVelocity = 25; // rad/s
         }
         public static final KinematicLimits LOW_KINEMATIC_LIMITS = new KinematicLimits();
@@ -309,14 +309,14 @@ public class Constants {
             DRIVE_CONTROLLER_CONFIG.kD = 0.02;
             DRIVE_CONTROLLER_CONFIG.kF = 0.0;
             // use these PID values when shifted up
-            DRIVE_CONTROLLER_CONFIG.kP1 = 58.0;
+            DRIVE_CONTROLLER_CONFIG.kP1 = 45.0;
             DRIVE_CONTROLLER_CONFIG.kI1 = 0;
-            DRIVE_CONTROLLER_CONFIG.kD1 = 0.02;
+            DRIVE_CONTROLLER_CONFIG.kD1 = 0.0;
 
             DRIVE_CONTROLLER_CONFIG.kF1 = 0.0;
 
-            DRIVE_CONTROLLER_CONFIG.CRUISE_VELOCITY = 1000;
-            DRIVE_CONTROLLER_CONFIG.ACCELERATION = 525;
+            DRIVE_CONTROLLER_CONFIG.CRUISE_VELOCITY = 1500;
+            DRIVE_CONTROLLER_CONFIG.ACCELERATION = 750;
             DRIVE_CONTROLLER_CONFIG.JERK = 1000;
         }
         public static final OutliersTalon.ClosedLoopConfiguration STEER_CONTROLLER_CONFIG = new OutliersTalon.ClosedLoopConfiguration();
